@@ -233,13 +233,13 @@
         </div>
         <div class="illustration-body" style="text-align: center;">
             <svg width="100%" height="155" viewBox="0 0 720 155" xmlns="http://www.w3.org/2000/svg">
-                <!-- Box 1: XAMPP Control -->
+                <!-- Box 1: Services -->
                 <rect x="10" y="20" width="150" height="110" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
-                <text x="85" y="45" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="bold" fill="#1e3a8a" text-anchor="middle">XAMPP CONTROL</text>
+                <text x="85" y="45" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="bold" fill="#1e3a8a" text-anchor="middle">WEB &amp; DATABASE</text>
                 <rect x="25" y="60" width="120" height="26" rx="4" fill="#22c55e" fill-opacity="0.15" stroke="#16a34a" stroke-width="1"/>
-                <text x="85" y="77" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="bold" fill="#15803d" text-anchor="middle">● Apache (Port 80)</text>
-                <rect x="25" y="93" width="120" height="26" rx="4" fill="#22c55e" fill-opacity="0.15" stroke="#16a34a" stroke-width="1"/>
-                <text x="85" y="110" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="bold" fill="#15803d" text-anchor="middle">● MySQL (Port 3306)</text>
+                <text x="85" y="77" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="bold" fill="#15803d" text-anchor="middle">● XAMPP Apache (:80)</text>
+                <rect x="25" y="93" width="120" height="26" rx="4" fill="#10b981" fill-opacity="0.15" stroke="#059669" stroke-width="1"/>
+                <text x="85" y="110" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="bold" fill="#047857" text-anchor="middle">● MongoDB (:27017)</text>
 
                 <!-- Arrow 1 -->
                 <path d="M 160 75 L 195 75" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
@@ -284,44 +284,44 @@
     <!-- BƯỚC 1 -->
     <div class="section-title">
         <span class="section-number">1</span>
-        <span>Khởi động dịch vụ trên XAMPP Control Panel</span>
+        <span>Khởi động dịch vụ Web Server (XAMPP) &amp; Cơ sở dữ liệu (MongoDB)</span>
     </div>
     <ol>
-        <li>Mở ứng dụng <strong>XAMPP Control Panel</strong> tại đường dẫn <code>C:\xampp\xampp-control.exe</code>.</li>
-        <li>Bấm nút <strong>Start</strong> tại dòng <strong>Apache</strong> (đảm bảo hiện Port <code>80, 443</code>).</li>
-        <li>Bấm nút <strong>Start</strong> tại dòng <strong>MySQL</strong> (đảm bảo hiện Port <code>3306</code>).</li>
+        <li><strong>Dịch vụ MongoDB (Port 27017):</strong> Mở PowerShell/CMD gõ lệnh <code>net start MongoDB</code> (hoặc khởi động dịch vụ MongoDB trong Services.msc / MongoDB Compass).</li>
+        <li><strong>Dịch vụ XAMPP Apache (Port 80, 443):</strong> Mở ứng dụng <strong>XAMPP Control Panel</strong> tại <code>C:\xampp\xampp-control.exe</code>, bấm nút <strong>Start</strong> tại dòng <strong>Apache</strong>.</li>
+        <li><em>(Tùy chọn)</em> Bấm nút <strong>Start</strong> tại dòng <strong>MySQL</strong> (Port 3306) nếu muốn sử dụng cơ sở dữ liệu quan hệ dự phòng.</li>
     </ol>
 
-    <!-- MINH HỌA 2: XAMPP CONTROL PANEL UI -->
+    <!-- MINH HỌA 2: SERVICES STATUS UI -->
     <div class="illustration-box">
         <div class="illustration-header">
-            <span>HÌNH 2: GIAO DIỆN XAMPP CONTROL PANEL KHI KHỞI ĐỘNG THÀNH CÔNG</span>
+            <span>HÌNH 2: TRẠNG THÁI DỊCH VỤ XAMPP APACHE &amp; MONGODB HOẠT ĐỘNG THÀNH CÔNG</span>
             <span><span class="status-dot dot-green"></span>Active</span>
         </div>
         <div class="illustration-body" style="padding: 10px 14px;">
             <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px; font-family: 'Segoe UI', sans-serif;">
                 <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 11px; color: #475569; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 6px;">
-                    <span style="width: 120px;">Module</span>
-                    <span style="width: 80px;">PID(s)</span>
-                    <span style="width: 120px;">Port(s)</span>
-                    <span style="width: 100px;">Actions</span>
-                    <span style="flex: 1; text-align: right;">Status</span>
+                    <span style="width: 140px;">Dịch vụ (Service)</span>
+                    <span style="width: 120px;">Môi trường</span>
+                    <span style="width: 100px;">Cổng (Port)</span>
+                    <span style="width: 100px;">Driver / Module</span>
+                    <span style="flex: 1; text-align: right;">Trạng thái</span>
                 </div>
                 <!-- Apache row -->
                 <div style="display: flex; justify-content: space-between; align-items: center; background: #dcfce7; border: 1px solid #86efac; border-radius: 4px; padding: 5px 8px; margin-bottom: 5px;">
-                    <span style="width: 120px; font-weight: bold; color: #166534;">Apache</span>
-                    <span style="width: 80px; font-family: monospace; font-size: 11px; color: #15803d;">4120, 5892</span>
-                    <span style="width: 120px; font-family: monospace; font-size: 11px; color: #15803d;">80, 443</span>
-                    <span style="width: 100px;"><button style="background: #e2e8f0; border: 1px solid #94a3b8; border-radius: 3px; font-size: 10px; padding: 1px 6px;">Stop</button></span>
+                    <span style="width: 140px; font-weight: bold; color: #166534;">Apache HTTPD</span>
+                    <span style="width: 120px; font-size: 11px; color: #15803d;">XAMPP (C:\xampp)</span>
+                    <span style="width: 100px; font-family: monospace; font-size: 11px; color: #15803d;">80, 443</span>
+                    <span style="width: 100px; font-size: 11px; color: #15803d;">PHP 8.3 + FastCGI</span>
                     <span style="flex: 1; text-align: right; font-weight: bold; font-size: 11px; color: #16a34a;">● Running</span>
                 </div>
-                <!-- MySQL row -->
-                <div style="display: flex; justify-content: space-between; align-items: center; background: #dcfce7; border: 1px solid #86efac; border-radius: 4px; padding: 5px 8px;">
-                    <span style="width: 120px; font-weight: bold; color: #166534;">MySQL</span>
-                    <span style="width: 80px; font-family: monospace; font-size: 11px; color: #15803d;">7244</span>
-                    <span style="width: 120px; font-family: monospace; font-size: 11px; color: #15803d;">3306</span>
-                    <span style="width: 100px;"><button style="background: #e2e8f0; border: 1px solid #94a3b8; border-radius: 3px; font-size: 10px; padding: 1px 6px;">Stop</button></span>
-                    <span style="flex: 1; text-align: right; font-weight: bold; font-size: 11px; color: #16a34a;">● Running</span>
+                <!-- MongoDB row -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: #ecfdf5; border: 1px solid #6ee7b7; border-radius: 4px; padding: 5px 8px;">
+                    <span style="width: 140px; font-weight: bold; color: #065f46;">MongoDB Server</span>
+                    <span style="width: 120px; font-size: 11px; color: #047857;">Community Server</span>
+                    <span style="width: 100px; font-family: monospace; font-size: 11px; color: #047857;">27017</span>
+                    <span style="width: 100px; font-size: 11px; color: #047857;">ext-mongodb (PHP)</span>
+                    <span style="flex: 1; text-align: right; font-weight: bold; font-size: 11px; color: #059669;">● Connected</span>
                 </div>
             </div>
         </div>
@@ -358,41 +358,41 @@
         </div>
         <div class="illustration-body" style="padding: 10px 14px;">
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 11px;">
-                <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; background: #f8fafc;">
-                    <div style="font-weight: bold; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 4px;">📁 users</div>
-                    <div>• id (PK)</div>
+                <div style="border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px; background: #f0fdf4;">
+                    <div style="font-weight: bold; color: #047857; border-bottom: 1px solid #6ee7b7; padding-bottom: 3px; margin-bottom: 4px;">📂 users</div>
+                    <div>• _id (ObjectId)</div>
                     <div>• name, email, role</div>
-                    <div>• password, token</div>
+                    <div>• password, status</div>
                 </div>
-                <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; background: #f8fafc;">
-                    <div style="font-weight: bold; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 4px;">📁 products</div>
-                    <div>• id (PK), sku, name</div>
+                <div style="border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px; background: #f0fdf4;">
+                    <div style="font-weight: bold; color: #047857; border-bottom: 1px solid #6ee7b7; padding-bottom: 3px; margin-bottom: 4px;">📂 products</div>
+                    <div>• _id (ObjectId), sku</div>
+                    <div>• name, category_id</div>
                     <div>• current_stock, min_stock</div>
-                    <div>• purchase_price, unit</div>
                 </div>
-                <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; background: #f8fafc;">
-                    <div style="font-weight: bold; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 4px;">📁 goods_receipts</div>
-                    <div>• id (PK), code</div>
-                    <div>• supplier_id, user_id</div>
-                    <div>• status, total_amount</div>
+                <div style="border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px; background: #f0fdf4;">
+                    <div style="font-weight: bold; color: #047857; border-bottom: 1px solid #6ee7b7; padding-bottom: 3px; margin-bottom: 4px;">📂 goods_receipts</div>
+                    <div>• _id, code, supplier_id</div>
+                    <div>• user_id, status</div>
+                    <div>• total_amount, items[]</div>
                 </div>
-                <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; background: #f8fafc;">
-                    <div style="font-weight: bold; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 4px;">📁 goods_issues</div>
-                    <div>• id (PK), code</div>
-                    <div>• customer_name, user_id</div>
-                    <div>• status, total_amount</div>
+                <div style="border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px; background: #f0fdf4;">
+                    <div style="font-weight: bold; color: #047857; border-bottom: 1px solid #6ee7b7; padding-bottom: 3px; margin-bottom: 4px;">📂 goods_issues</div>
+                    <div>• _id, code, customer</div>
+                    <div>• user_id, status</div>
+                    <div>• total_amount, items[]</div>
                 </div>
-                <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; background: #f8fafc;">
-                    <div style="font-weight: bold; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 4px;">📁 inventory_logs</div>
+                <div style="border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px; background: #f0fdf4;">
+                    <div style="font-weight: bold; color: #047857; border-bottom: 1px solid #6ee7b7; padding-bottom: 3px; margin-bottom: 4px;">📂 inventory_logs</div>
                     <div>• product_id, change</div>
                     <div>• before / after qty</div>
                     <div>• reference_type / id</div>
                 </div>
-                <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; background: #f8fafc;">
-                    <div style="font-weight: bold; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 4px;">📁 categories & suppliers</div>
-                    <div>• id (PK), name</div>
-                    <div>• phone, email, address</div>
-                    <div>• created_at / updated_at</div>
+                <div style="border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px; background: #f0fdf4;">
+                    <div style="font-weight: bold; color: #047857; border-bottom: 1px solid #6ee7b7; padding-bottom: 3px; margin-bottom: 4px;">📂 categories &amp; tokens</div>
+                    <div>• categories (danh mục)</div>
+                    <div>• suppliers (nhà cung cấp)</div>
+                    <div>• personal_access_tokens</div>
                 </div>
             </div>
         </div>
@@ -530,16 +530,17 @@
     </div>
 
     <div class="card card-warning" style="margin-bottom: 8px;">
-        <strong>Lỗi 1: Cổng 80 hoặc 3306 bị chiếm dụng (Port Conflict)</strong><br>
+        <strong>Lỗi 1: Cổng 80 hoặc cổng 27017 bị xung đột / Dịch vụ chưa bật</strong><br>
         <span style="font-size: 11.5px; color: #4b5563;">
-            Nếu Apache không bật được do Skype, IIS hoặc dịch vụ World Wide Web Publishing Service chiếm cổng 80: Mở XAMPP -> Config -> <code>httpd.conf</code> -> Đổi <code>Listen 80</code> thành <code>Listen 8080</code>. Hoặc sử dụng phương thức khởi chạy bằng <code>chay_local.bat</code> (cổng 8000 độc lập).
+            - <strong>Nếu Apache không bật được (xung đột cổng 80):</strong> Dùng phương thức khởi chạy bằng <code>chay_local.bat</code> (máy chủ PHP độc lập tại cổng 8000, không phụ thuộc cổng 80 của Apache).<br>
+            - <strong>Nếu báo lỗi MongoDB "No suitable servers found":</strong> Dịch vụ MongoDB chưa chạy. Mở CMD quyền Administrator gõ <code>net start MongoDB</code> hoặc khởi động ứng dụng MongoDB Compass và nhấn Connect.
         </span>
     </div>
 
     <div class="card card-warning" style="margin-bottom: 8px;">
-        <strong>Lỗi 2: Báo lỗi "Access Denied" hoặc "Unknown Database laravel_inventory_management_system"</strong><br>
+        <strong>Lỗi 2: Kiểm tra cấu hình kết nối MongoDB &amp; MySQL trong file .env</strong><br>
         <span style="font-size: 11.5px; color: #4b5563;">
-            Kiểm tra file <code>.env</code> ở thư mục dự án đã đúng thông tin: <code>DB_HOST=127.0.0.1</code>, <code>DB_PORT=3306</code>, <code>DB_DATABASE=laravel_inventory_management_system</code>, <code>DB_USERNAME=root</code>, <code>DB_PASSWORD=</code>. Sau đó vào phpMyAdmin tạo cơ sở dữ liệu tên <code>laravel_inventory_management_system</code>.
+            File <code>.env</code> đã được thiết lập mặc định: <code>DB_CONNECTION=mongodb</code>, <code>DB_HOST=127.0.0.1</code>, <code>DB_PORT=27017</code>, <code>DB_DATABASE=laravel_inventory_management_system</code>. Nếu muốn chuyển sang dùng MySQL dự phòng của XAMPP, chỉ cần đổi <code>DB_CONNECTION=mysql</code> và <code>DB_PORT=3306</code>.
         </span>
     </div>
 
