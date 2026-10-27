@@ -1,6 +1,6 @@
 # Hệ Thống Quản Lý Nhập - Xuất - Tồn Kho (WMS)
 > **Đồ Án Chuyên Ngành Ngành Lập Trình Máy Tính**  
-> **Ứng dụng Laravel Framework & RESTful API**
+> **Ứng dụng Laravel Framework & RESTful API (Chạy trên môi trường XAMPP)**
 
 ---
 
@@ -42,28 +42,29 @@
 
 ---
 
-## 🚀 Hướng Dẫn Cài Đặt & Chạy Ứng Dụng
+## 🚀 Hướng Dẫn Cài Đặt & Chạy Ứng Dụng Trên XAMPP
 
-### Yêu Cầu Môi Trường
-- PHP >= 8.2 (Khuyên dùng PHP 8.3 trên Laragon / XAMPP)
-- Composer >= 2.0
-- Extension PHP: `pdo_sqlite`, `pdo_mysql`, `mbstring`, `openssl`, `curl`
+### Môi Trường XAMPP
+* **Thư mục cài đặt XAMPP:** `C:\xampp`
+* **PHP:** `C:\xampp\php` (PHP 8.3)
+* **Cơ sở dữ liệu:** MySQL / MariaDB (Port 3306, Database: `do_an_kho`, User: `root`, Password: rỗng)
+* **Thư mục Web Root:** Dự án đã được liên kết trực tiếp vào `C:\xampp\htdocs\do_an_kho`.
 
-### Các Bước Khởi Chạy Nhanh:
-Mở terminal PowerShell tại thư mục dự án `E:\do_an_kho`:
+### Các Bước Khởi Chạy:
+1. Mở **XAMPP Control Panel** (`C:\xampp\xampp-control.exe`), bấm **Start** cho **Apache** và **MySQL**.
+2. Mở PowerShell hoặc CMD tại thư mục dự án `E:\do_an_kho` (hoặc `C:\xampp\htdocs\do_an_kho`):
 
 ```powershell
-# 1. Cấu hình biến môi trường PHP & Composer của Laragon (nếu chưa có trong PATH)
-$env:Path = "E:\laragon\bin\php\php-8.3.33-Win32-vs16-x64;E:\laragon\bin\composer;E:\laragon\bin\nodejs\node-v22;E:\laragon\bin\git\cmd;" + $env:Path
+# Nạp đường dẫn PHP & Git của máy
+$env:Path = "C:\xampp\php;C:\Program Files\Git\cmd;" + $env:Path
 
-# 2. Khởi tạo Database và nạp dữ liệu mẫu
-php artisan migrate:fresh --seed
-
-# 3. Chạy Server phát triển
+# Khởi chạy server phát triển
 php artisan serve
 ```
 
-Truy cập hệ thống tại trình duyệt: **`http://localhost:8000`**
+Truy cập hệ thống tại: **`http://localhost:8000`**
+
+*(Hoặc truy cập trực tiếp qua máy chủ Apache của XAMPP tại: `http://localhost/do_an_kho/public`)*
 
 ---
 
@@ -78,9 +79,10 @@ Dự án đã tích hợp sẵn bộ kiểm thử chức năng tự động (PHP
 
 Chạy lệnh kiểm thử:
 ```powershell
+$env:Path = "C:\xampp\php;C:\Program Files\Git\cmd;" + $env:Path
 php artisan test
 ```
-*Kết quả: **11/11 Tests Passed**, **41 Assertions Passed** (100% đạt chuẩn).*
+*Kết quả: **11/11 Tests Passed**, **41 Assertions Passed** (100% đạt chuẩn trên MySQL của XAMPP).*
 
 ---
 
@@ -105,24 +107,3 @@ php artisan test
 ### Kiểm Thử Bằng Postman
 File Postman Collection được chuẩn bị sẵn tại: [`postman_collection.json`](./postman_collection.json).
 Mở Postman -> Chọn **Import** -> Chọn file `postman_collection.json` -> Chạy request `Login - Admin` (Token sẽ tự động lưu và gắn vào tất cả các request còn lại).
-
----
-
-## 🗄 Cấu Trúc Cơ Sở Dữ Liệu
-Hệ thống mặc định sử dụng **SQLite** (`database/database.sqlite`) để chấm bài chạy ngay không cần cài đặt phức tạp.
-
-Nếu muốn chuyển sang **MySQL** (trên Laragon / XAMPP):
-1. Mở file `.env`
-2. Đổi các dòng cấu hình database:
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=do_an_kho
-   DB_USERNAME=root
-   DB_PASSWORD=
-   ```
-3. Tạo database `do_an_kho` trong phpMyAdmin hoặc HeidiSQL, sau đó chạy:
-   ```powershell
-   php artisan migrate:fresh --seed
-   ```
