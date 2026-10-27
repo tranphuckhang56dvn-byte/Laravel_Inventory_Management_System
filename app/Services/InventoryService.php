@@ -110,7 +110,7 @@ class InventoryService
                     'quantity_change' => $quantity,
                     'quantity_after' => $after,
                     'unit_price' => $unitPrice,
-                    'note' => 'Nhập kho theo phiếu '.$receipt->code.($item['note'] ? ' ('.$item['note'].')' : ''),
+                    'note' => 'Nhập kho theo phiếu '.$receipt->code.(!empty($item['note']) ? ' ('.$item['note'].')' : ''),
                 ]);
             }
 

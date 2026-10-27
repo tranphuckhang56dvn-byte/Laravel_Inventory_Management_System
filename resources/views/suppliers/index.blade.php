@@ -14,9 +14,11 @@
                     <a href="{{ route('suppliers.index') }}" class="btn btn-outline-secondary"><i class="fa-solid fa-rotate-left"></i></a>
                 @endif
             </form>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createSupplierModal">
-                <i class="fa-solid fa-plus me-1"></i> Thêm Nhà Cung Cấp Mới
-            </button>
+            @if(auth()->user()->isAdmin())
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createSupplierModal">
+                    <i class="fa-solid fa-plus me-1"></i> Thêm Nhà Cung Cấp Mới
+                </button>
+            @endif
         </div>
     </div>
 </div>
@@ -55,10 +57,10 @@
                             </span>
                         </td>
                         <td class="text-end">
-                            <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal" data-bs-target="#editSup{{ $sup->id }}" title="Chỉnh sửa">
-                                <i class="fa-solid fa-pen"></i>
-                            </button>
                             @if(auth()->user()->isAdmin())
+                                <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal" data-bs-target="#editSup{{ $sup->id }}" title="Chỉnh sửa">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
                                 <form id="del-sup-{{ $sup->id }}" method="POST" action="{{ route('suppliers.destroy', $sup) }}" class="d-inline-block m-0">
                                     @csrf
                                     @method('DELETE')

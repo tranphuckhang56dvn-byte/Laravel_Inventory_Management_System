@@ -22,7 +22,7 @@ Route::prefix('auth')->group(function () {
 });
 
 // Các API yêu cầu xác thực Sanctum Token
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum,web'])->group(function () {
     // Auth routes
     Route::prefix('auth')->group(function () {
         Route::get('/me', [AuthController::class, 'me']);
@@ -35,16 +35,29 @@ Route::middleware('auth:sanctum')->group(function () {
     // Cảnh báo tồn kho thấp
     Route::get('/products/low-stock', [ProductController::class, 'lowStock']);
 
-    // Quản lý sản phẩm
-    Route::apiResource('products', ProductController::class);
-    Route::post('/products/{product}/adjust-stock', [ProductController::class, 'adjustStock'])
-        ->middleware('role:admin'); // Chỉ admin được kiểm kê điều chỉnh tồn kho
+    // Danh mục dữ liệu - Tra cứu (Staff + Admin)
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/products/{product}', [ProductController::class, 'show']);
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/categories/{category}', [CategoryController::class, 'show']);
+    Route::get('/suppliers', [SupplierController::class, 'index']);
+    Route::get('/suppliers/{supplier}', [SupplierController::class, 'show']);
 
-    // Quản lý danh mục
-    Route::apiResource('categories', CategoryController::class);
+    // Danh mục dữ liệu - Quyền quản trị cao nhất (Chỉ Quản trị viên - Admin)
+    Route::middleware('role:admin')->group(function () {
+        Route::post('/products', [ProductController::class, 'store']);
+        Route::put('/products/{product}', [ProductController::class, 'update']);
+        Route::delete('/products/{product}', [ProductController::class, 'destroy']);
+        Route::post('/products/{product}/adjust-stock', [ProductController::class, 'adjustStock']);
 
-    // Quản lý nhà cung cấp
-    Route::apiResource('suppliers', SupplierController::class);
+        Route::post('/categories', [CategoryController::class, 'store']);
+        Route::put('/categories/{category}', [CategoryController::class, 'update']);
+        Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
+
+        Route::post('/suppliers', [SupplierController::class, 'store']);
+        Route::put('/suppliers/{supplier}', [SupplierController::class, 'update']);
+        Route::delete('/suppliers/{supplier}', [SupplierController::class, 'destroy']);
+    });
 
     // Phiếu nhập kho (Transaction + Pessimistic Locking)
     Route::get('/goods-receipts', [GoodsReceiptController::class, 'index']);

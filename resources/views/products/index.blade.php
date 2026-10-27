@@ -27,7 +27,7 @@
                 <select name="stock_status" class="form-select">
                     <option value="">-- Tình trạng tồn kho --</option>
                     <option value="in" {{ request('stock_status') == 'in' ? 'selected' : '' }}>Còn hàng trong kho</option>
-                    <option value="low" {{ request('stock_status') == 'low' ? 'selected' : '' }}>⚠️ Cảnh báo tồn thấp (≤ min_stock)</option>
+                    <option value="low" {{ request('stock_status') == 'low' ? 'selected' : '' }}>⚠️ Cảnh báo tồn thấp (< min_stock)</option>
                     <option value="out" {{ request('stock_status') == 'out' ? 'selected' : '' }}>Hết hàng (0)</option>
                 </select>
             </div>
@@ -56,9 +56,11 @@
             <a href="{{ route('products.low-stock') }}" class="btn btn-sm btn-outline-warning">
                 <i class="fa-solid fa-triangle-exclamation me-1"></i> Xem cảnh báo
             </a>
-            <a href="{{ route('products.create') }}" class="btn btn-sm btn-primary">
-                <i class="fa-solid fa-plus me-1"></i> Thêm sản phẩm mới
-            </a>
+            @if(auth()->user()->isAdmin())
+                <a href="{{ route('products.create') }}" class="btn btn-sm btn-primary">
+                    <i class="fa-solid fa-plus me-1"></i> Thêm sản phẩm mới
+                </a>
+            @endif
         </div>
     </div>
     <div class="table-responsive">
@@ -99,7 +101,7 @@
                         <td class="text-center">
                             @if($product->current_stock <= 0)
                                 <span class="badge badge-subtle-danger fs-6 px-2 py-1">Hết hàng (0)</span>
-                            @elseif($product->current_stock <= $product->min_stock)
+                            @elseif($product->current_stock < $product->min_stock)
                                 <span class="badge badge-subtle-warning fs-6 px-2 py-1 text-danger fw-bold">
                                     <i class="fa-solid fa-triangle-exclamation me-1"></i>{{ $product->current_stock }} {{ $product->unit }}
                                 </span>
@@ -128,17 +130,17 @@
                                             <i class="fa-solid fa-eye text-primary me-2"></i> Chi tiết & Lịch sử
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('products.edit', $product) }}">
-                                            <i class="fa-solid fa-pen-to-square text-info me-2"></i> Chỉnh sửa
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#adjustModal{{ $product->id }}">
-                                            <i class="fa-solid fa-sliders text-warning me-2"></i> Kiểm kê / Điều chỉnh
-                                        </button>
-                                    </li>
                                     @if(auth()->user()->isAdmin())
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('products.edit', $product) }}">
+                                                <i class="fa-solid fa-pen-to-square text-info me-2"></i> Chỉnh sửa
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#adjustModal{{ $product->id }}">
+                                                <i class="fa-solid fa-sliders text-warning me-2"></i> Kiểm kê / Điều chỉnh
+                                            </button>
+                                        </li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li>
                                             <form id="delete-product-{{ $product->id }}" method="POST" action="{{ route('products.destroy', $product) }}" class="m-0">

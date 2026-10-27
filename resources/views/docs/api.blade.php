@@ -21,6 +21,9 @@
                 Authorization: Bearer &lt;your_token&gt;<br>
                 Accept: application/json
             </div>
+            <div class="alert alert-info py-2 px-3 small mb-3">
+                <i class="fa-solid fa-circle-info me-1"></i> <strong>Lưu ý:</strong> Khi đang đăng nhập trên trình duyệt Web, bạn có thể mở trực tiếp các đường dẫn API (như <code>/api/products</code>, <code>/api/categories</code>, <code>/api/suppliers</code>) để xem dữ liệu JSON mà không bị lỗi <em>Unauthenticated</em>.
+            </div>
 
             <h6 class="fw-bold small text-dark mb-2">Tài khoản kiểm thử Postman:</h6>
             <div class="p-3 bg-light rounded-3 small font-monospace mb-3">
@@ -128,7 +131,7 @@
                             <tr>
                                 <td><span class="badge bg-primary">GET</span></td>
                                 <td><code>/api/products/low-stock</code></td>
-                                <td>Danh sách các sản phẩm đang có tồn kho <code>current_stock &le; min_stock</code></td>
+                                <td>Danh sách các sản phẩm đang có tồn kho <code>current_stock &lt; min_stock</code></td>
                             </tr>
                             <tr>
                                 <td><span class="badge bg-success">POST</span></td>

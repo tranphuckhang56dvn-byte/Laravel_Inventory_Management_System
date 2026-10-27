@@ -9,7 +9,7 @@
     <div>
         <h6 class="fw-bold mb-1 text-danger">Quy định cảnh báo tồn kho tối thiểu</h6>
         <p class="mb-0 small text-danger text-opacity-75">
-            Danh sách dưới đây liệt kê các sản phẩm có số lượng tồn kho thực tế <code>current_stock</code> nhỏ hơn hoặc bằng ngưỡng an toàn <code>min_stock</code>. Thủ kho cần lên phương án nhập bổ sung ngay để tránh gián đoạn kinh doanh.
+            Danh sách dưới đây liệt kê các sản phẩm có số lượng tồn kho thực tế <code>current_stock</code> nhỏ hơn ngưỡng an toàn <code>min_stock</code>. Thủ kho cần lên phương án nhập bổ sung ngay để tránh gián đoạn kinh doanh.
         </p>
     </div>
 </div>

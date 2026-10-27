@@ -242,7 +242,12 @@ class InventorySystemTest extends TestCase
         // Ban đầu tồn là 10, min_stock là 5 => Chưa cảnh báo
         $this->assertFalse($this->product->isLowStock());
 
-        // Cập nhật tồn kho xuống 3 <= min_stock (5)
+        // Khi tồn kho bằng đúng ngưỡng tối thiểu (5 == 5) => Không cảnh báo
+        $this->product->update(['current_stock' => 5]);
+        $this->assertFalse($this->product->isLowStock());
+        $this->assertEquals(0, Product::lowStock()->count());
+
+        // Cập nhật tồn kho xuống 3 < min_stock (5) => Cảnh báo
         $this->product->update(['current_stock' => 3]);
         $this->assertTrue($this->product->isLowStock());
 
@@ -300,5 +305,33 @@ class InventorySystemTest extends TestCase
             'quantity_change' => -2,
             'quantity_after' => 8,
         ]);
+    }
+
+    /**
+     * Test Phân quyền Danh mục dữ liệu: Chỉ Admin có quyền Thêm, Sửa, Xóa; Staff chỉ được tra cứu
+     */
+    public function test_staff_cannot_create_or_modify_master_data(): void
+    {
+        // Staff chỉ xem được danh sách
+        $this->actingAs($this->staff)->get('/products')->assertStatus(200);
+        $this->actingAs($this->staff)->get('/categories')->assertStatus(200);
+        $this->actingAs($this->staff)->get('/suppliers')->assertStatus(200);
+
+        // Staff bị chặn khi cố tạo hoặc sửa
+        $this->actingAs($this->staff)->get('/products/create')->assertStatus(403);
+        $this->actingAs($this->staff)->post('/categories', [
+            'code' => 'CAT-STAFF',
+            'name' => 'Danh mục của Staff',
+        ])->assertStatus(403);
+        $this->actingAs($this->staff)->delete('/categories/'.$this->category->id)->assertStatus(403);
+    }
+
+    /**
+     * Test Admin có quyền cao nhất trên Danh mục dữ liệu
+     */
+    public function test_admin_has_full_master_data_access(): void
+    {
+        $this->actingAs($this->admin)->get('/products/create')->assertStatus(200);
+        $this->actingAs($this->admin)->get('/products/'.$this->product->id.'/edit')->assertStatus(200);
     }
 }

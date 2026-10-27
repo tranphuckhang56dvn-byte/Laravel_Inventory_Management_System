@@ -7,35 +7,43 @@
 <div class="row g-4">
     <!-- Form Thêm Danh mục nhanh ở bên trái -->
     <div class="col-lg-4">
-        <div class="card card-custom">
-            <div class="card-header bg-white border-bottom py-3">
-                <h6 class="fw-bold mb-0 text-dark">
-                    <i class="fa-solid fa-plus-circle text-primary me-2"></i>Thêm Danh Mục Mới
-                </h6>
+        @if(auth()->user()->isAdmin())
+            <div class="card card-custom">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h6 class="fw-bold mb-0 text-dark">
+                        <i class="fa-solid fa-plus-circle text-primary me-2"></i>Thêm Danh Mục Mới
+                    </h6>
+                </div>
+                <form method="POST" action="{{ route('categories.store') }}" class="card-body p-3">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-secondary">Mã danh mục (*)</label>
+                        <input type="text" name="code" class="form-control" placeholder="Ví dụ: CAT-DIENTU" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-secondary">Tên danh mục (*)</label>
+                        <input type="text" name="name" class="form-control" placeholder="Ví dụ: Thiết bị văn phòng" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-secondary">Mô tả ngắn</label>
+                        <textarea name="description" class="form-control" rows="3" placeholder="Mô tả nhóm hàng hóa..."></textarea>
+                    </div>
+                    <div class="mb-3 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="status" id="catStatus" value="1" checked>
+                        <label class="form-check-label small text-secondary fw-semibold" for="catStatus">Trạng thái hoạt động</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fa-solid fa-floppy-disk me-1"></i> Lưu Danh Mục
+                    </button>
+                </form>
             </div>
-            <form method="POST" action="{{ route('categories.store') }}" class="card-body p-3">
-                @csrf
-                <div class="mb-3">
-                    <label class="form-label small fw-semibold text-secondary">Mã danh mục (*)</label>
-                    <input type="text" name="code" class="form-control" placeholder="Ví dụ: CAT-DIENTU" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label small fw-semibold text-secondary">Tên danh mục (*)</label>
-                    <input type="text" name="name" class="form-control" placeholder="Ví dụ: Thiết bị văn phòng" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label small fw-semibold text-secondary">Mô tả ngắn</label>
-                    <textarea name="description" class="form-control" rows="3" placeholder="Mô tả nhóm hàng hóa..."></textarea>
-                </div>
-                <div class="mb-3 form-check form-switch">
-                    <input class="form-check-input" type="checkbox" name="status" id="catStatus" value="1" checked>
-                    <label class="form-check-label small text-secondary fw-semibold" for="catStatus">Trạng thái hoạt động</label>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">
-                    <i class="fa-solid fa-floppy-disk me-1"></i> Lưu Danh Mục
-                </button>
-            </form>
-        </div>
+        @else
+            <div class="card card-custom p-4 text-center">
+                <div class="text-secondary mb-3"><i class="fa-solid fa-shield-halved fs-1 text-primary"></i></div>
+                <h6 class="fw-bold mb-2">Phân Quyền Quản Lý Danh Mục</h6>
+                <p class="small text-muted mb-0">Chức năng thêm mới, chỉnh sửa và xóa danh mục hàng hóa được cấp quyền cao nhất cho <strong>Quản trị viên (Admin)</strong>. Thủ kho chỉ có quyền tra cứu.</p>
+            </div>
+        @endif
     </div>
 
     <!-- Bảng Danh sách Danh mục ở bên phải -->
@@ -73,10 +81,10 @@
                                     </span>
                                 </td>
                                 <td class="text-end">
-                                    <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal" data-bs-target="#editCat{{ $category->id }}" title="Sửa">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
                                     @if(auth()->user()->isAdmin())
+                                        <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal" data-bs-target="#editCat{{ $category->id }}" title="Sửa">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
                                         <form id="del-cat-{{ $category->id }}" method="POST" action="{{ route('categories.destroy', $category) }}" class="d-inline-block m-0">
                                             @csrf
                                             @method('DELETE')
