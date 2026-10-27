@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hướng Dẫn Cài Đặt & Khởi Chạy Local (XAMPP) - WMS</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 12mm 14mm 12mm 14mm;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            background-color: #ffffff;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .page {
+            page-break-after: always;
+            padding-bottom: 10px;
+        }
+        .page:last-child {
+            page-break-after: avoid;
+        }
+        .header-banner {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
+            color: #ffffff;
+            padding: 24px 28px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+        .header-banner h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+        .header-banner h2 {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.92;
+            margin-bottom: 14px;
+        }
+        .meta-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .badge {
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 6px;
+            margin-top: 18px;
+            margin-bottom: 12px;
+        }
+        .section-number {
+            background: #2563eb;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        p, li {
+            color: #334155;
+            margin-bottom: 6px;
+        }
+        ul, ol {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+        }
+        .card-accent {
+            border-left: 4px solid #2563eb;
+        }
+        .card-success {
+            border-left: 4px solid #10b981;
+            background: #f0fdf4;
+        }
+        .card-warning {
+            border-left: 4px solid #f59e0b;
+            background: #fffbeb;
+        }
+        pre, code {
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        .code-block {
+            background: #0f172a;
+            color: #f1f5f9;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            line-height: 1.5;
+            margin: 8px 0 14px 0;
+            overflow-x: auto;
+        }
+        .code-block .comment {
+            color: #64748b;
+        }
+        .code-block .cmd {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+        .code-block .param {
+            color: #fde047;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0 16px 0;
+            font-size: 12px;
+        }
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 7px 10px;
+            text-align: left;
+        }
+        th {
+            background: #f1f5f9;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        .illustration-box {
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            background: #ffffff;
+            margin: 12px 0 16px 0;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            page-break-inside: avoid;
+        }
+        .illustration-header {
+            background: #f1f5f9;
+            padding: 6px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 11px;
+            font-weight: bold;
+            color: #475569;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .illustration-body {
+            padding: 14px;
+        }
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 4px;
+        }
+        .dot-green { background-color: #22c55e; }
+        .dot-yellow { background-color: #eab308; }
+        .dot-red { background-color: #ef4444; }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 8px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+<!-- TRANG 1 -->
+<div class="page">
+    <div class="header-banner">
+        <h1>HƯỚNG DẪN CÀI ĐẶT & KHỞI CHẠY LOCAL</h1>
+        <h2>Hệ Thống Quản Lý Nhập - Xuất - Tồn Kho (Laravel WMS) trên Môi Trường XAMPP</h2>
+        <div class="meta-badges">
+            <span class="badge">Laravel 11 / 13</span>
+            <span class="badge">PHP 8.3 (XAMPP)</span>
+            <span class="badge">MySQL / MariaDB</span>
+            <span class="badge">Tác giả: Thái Anh Kiệt & Trần Phúc Khang</span>
+            <span class="badge">Đồ Án Chuyên Ngành CNTT</span>
+        </div>
+    </div>
+
+    <div class="card card-accent">
+        <strong>Tóm tắt cấu hình môi trường chuẩn:</strong>
+        <ul style="margin-top: 6px; margin-bottom: 0;">
+            <li><strong>Thư mục mã nguồn thực tế:</strong> <code>E:\Laravel_Inventory_Management_System</code></li>
+            <li><strong>Thư mục cài đặt XAMPP:</strong> <code>C:\xampp</code> (PHP tại: <code>C:\xampp\php\php.exe</code>)</li>
+            <li><strong>Thư mục Web Root (Junction):</strong> <code>C:\xampp\htdocs\Laravel_Inventory_Management_System</code> và <code>C:\xampp\htdocs\do_an_kho</code></li>
+            <li><strong>Cơ sở dữ liệu:</strong> MySQL Port 3306, Database: <code>do_an_kho</code>, User: <code>root</code>, Password: <em>(để trống)</em></li>
+        </ul>
+    </div>
+
+    <!-- MINH HỌA 1: SƠ ĐỒ KIẾN TRÚC -->
+    <div class="illustration-box">
+        <div class="illustration-header">
+            <span>HÌNH 1: SƠ ĐỒ LUỒNG HOẠT ĐỘNG KHỞI CHẠY HỆ THỐNG TRÊN LOCAL</span>
+            <span style="color: #2563eb;">Architectural Workflow</span>
+        </div>
+        <div class="illustration-body" style="text-align: center;">
+            <svg width="100%" height="155" viewBox="0 0 720 155" xmlns="http://www.w3.org/2000/svg">
+                <!-- Box 1: XAMPP Control -->
+                <rect x="10" y="20" width="150" height="110" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+                <text x="85" y="45" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="bold" fill="#1e3a8a" text-anchor="middle">XAMPP CONTROL</text>
+                <rect x="25" y="60" width="120" height="26" rx="4" fill="#22c55e" fill-opacity="0.15" stroke="#16a34a" stroke-width="1"/>
+                <text x="85" y="77" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="bold" fill="#15803d" text-anchor="middle">● Apache (Port 80)</text>
+                <rect x="25" y="93" width="120" height="26" rx="4" fill="#22c55e" fill-opacity="0.15" stroke="#16a34a" stroke-width="1"/>
+                <text x="85" y="110" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="bold" fill="#15803d" text-anchor="middle">● MySQL (Port 3306)</text>
+
+                <!-- Arrow 1 -->
+                <path d="M 160 75 L 195 75" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 1 L 8 5 L 0 9 z" fill="#64748b"/>
+                    </marker>
+                </defs>
+
+                <!-- Box 2: Source & Junction -->
+                <rect x="200" y="20" width="175" height="110" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+                <text x="287" y="45" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">MÃ NGUỒN DỰ ÁN</text>
+                <text x="287" y="66" font-family="'Segoe UI', sans-serif" font-size="10" fill="#475569" text-anchor="middle">E:\Laravel_Inventory...</text>
+                <line x1="210" y1="75" x2="365" y2="75" stroke="#cbd5e1" stroke-width="1"/>
+                <text x="287" y="93" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="middle">Directory Junction</text>
+                <text x="287" y="110" font-family="'Segoe UI', sans-serif" font-size="9" fill="#64748b" text-anchor="middle">C:\xampp\htdocs\do_an_kho</text>
+
+                <!-- Arrow 2 -->
+                <path d="M 375 75 L 410 75" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                <!-- Box 3: Engine -->
+                <rect x="415" y="20" width="145" height="110" rx="8" fill="#fdf4ff" stroke="#c084fc" stroke-width="2"/>
+                <text x="487" y="45" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="bold" fill="#7e22ce" text-anchor="middle">KHỞI CHẠY SERVER</text>
+                <rect x="425" y="58" width="125" height="30" rx="4" fill="#0f172a"/>
+                <text x="487" y="77" font-family="'Consolas', monospace" font-size="10" fill="#38bdf8" text-anchor="middle">chay_local.bat</text>
+                <text x="487" y="105" font-family="'Segoe UI', sans-serif" font-size="9" fill="#6b21a8" text-anchor="middle">php artisan serve</text>
+
+                <!-- Arrow 3 -->
+                <path d="M 560 75 L 595 75" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                <!-- Box 4: Client -->
+                <rect x="600" y="20" width="110" height="110" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+                <text x="655" y="45" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="bold" fill="#065f46" text-anchor="middle">TRÌNH DUYỆT</text>
+                <circle cx="655" cy="73" r="14" fill="#10b981" fill-opacity="0.2"/>
+                <text x="655" y="78" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="bold" fill="#047857" text-anchor="middle">🌐</text>
+                <text x="655" y="102" font-family="'Consolas', monospace" font-size="9" font-weight="bold" fill="#047857" text-anchor="middle">:8000</text>
+                <text x="655" y="117" font-family="'Segoe UI', sans-serif" font-size="8" fill="#065f46" text-anchor="middle">Giao diện WMS</text>
+            </svg>
+        </div>
+    </div>
+
+    <!-- BƯỚC 1 -->
+    <div class="section-title">
+        <span class="section-number">1</span>
+        <span>Khởi động dịch vụ trên XAMPP Control Panel</span>
+    </div>
+    <ol>
+        <li>Mở ứng dụng <strong>XAMPP Control Panel</strong> tại đường dẫn <code>C:\xampp\xampp-control.exe</code>.</li>
+        <li>Bấm nút <strong>Start</strong> tại dòng <strong>Apache</strong> (đảm bảo hiện Port <code>80, 443</code>).</li>
+        <li>Bấm nút <strong>Start</strong> tại dòng <strong>MySQL</strong> (đảm bảo hiện Port <code>3306</code>).</li>
+    </ol>
+
+    <!-- MINH HỌA 2: XAMPP CONTROL PANEL UI -->
+    <div class="illustration-box">
+        <div class="illustration-header">
+            <span>HÌNH 2: GIAO DIỆN XAMPP CONTROL PANEL KHI KHỞI ĐỘNG THÀNH CÔNG</span>
+            <span><span class="status-dot dot-green"></span>Active</span>
+        </div>
+        <div class="illustration-body" style="padding: 10px 14px;">
+            <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px; font-family: 'Segoe UI', sans-serif;">
+                <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 11px; color: #475569; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 6px;">
+                    <span style="width: 120px;">Module</span>
+                    <span style="width: 80px;">PID(s)</span>
+                    <span style="width: 120px;">Port(s)</span>
+                    <span style="width: 100px;">Actions</span>
+                    <span style="flex: 1; text-align: right;">Status</span>
+                </div>
+                <!-- Apache row -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: #dcfce7; border: 1px solid #86efac; border-radius: 4px; padding: 5px 8px; margin-bottom: 5px;">
+                    <span style="width: 120px; font-weight: bold; color: #166534;">Apache</span>
+                    <span style="width: 80px; font-family: monospace; font-size: 11px; color: #15803d;">4120, 5892</span>
+                    <span style="width: 120px; font-family: monospace; font-size: 11px; color: #15803d;">80, 443</span>
+                    <span style="width: 100px;"><button style="background: #e2e8f0; border: 1px solid #94a3b8; border-radius: 3px; font-size: 10px; padding: 1px 6px;">Stop</button></span>
+                    <span style="flex: 1; text-align: right; font-weight: bold; font-size: 11px; color: #16a34a;">● Running</span>
+                </div>
+                <!-- MySQL row -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: #dcfce7; border: 1px solid #86efac; border-radius: 4px; padding: 5px 8px;">
+                    <span style="width: 120px; font-weight: bold; color: #166534;">MySQL</span>
+                    <span style="width: 80px; font-family: monospace; font-size: 11px; color: #15803d;">7244</span>
+                    <span style="width: 120px; font-family: monospace; font-size: 11px; color: #15803d;">3306</span>
+                    <span style="width: 100px;"><button style="background: #e2e8f0; border: 1px solid #94a3b8; border-radius: 3px; font-size: 10px; padding: 1px 6px;">Stop</button></span>
+                    <span style="flex: 1; text-align: right; font-weight: bold; font-size: 11px; color: #16a34a;">● Running</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>Laravel Inventory Management System • Hướng Dẫn Vận Hành Local</span>
+        <span>Trang 1 / 3</span>
+    </div>
+</div>
+
+<!-- TRANG 2 -->
+<div class="page">
+    <!-- BƯỚC 2 -->
+    <div class="section-title">
+        <span class="section-number">2</span>
+        <span>Kiểm tra Cơ sở dữ liệu MySQL trên phpMyAdmin</span>
+    </div>
+    <p>1. Mở trình duyệt web và truy cập địa chỉ: <strong><code>http://localhost/phpmyadmin</code></strong></p>
+    <p>2. Đảm bảo Database <strong><code>do_an_kho</code></strong> đã được tạo. Nếu tạo mới, chọn bảng mã <code>utf8mb4_unicode_ci</code>.</p>
+    <p>3. Trong trường hợp muốn nạp lại dữ liệu trắng chuẩn mẫu (Clean State), chạy lệnh sau trong Terminal:</p>
+    <div class="code-block">
+        <span class="comment"># Thiết lập biến môi trường PHP của XAMPP</span><br>
+        <span class="cmd">$env:Path</span> = <span class="param">"C:\xampp\php;C:\Program Files\Git\cmd;"</span> + <span class="cmd">$env:Path</span><br>
+        <span class="comment"># Khởi tạo lại bảng và nạp Seeder</span><br>
+        <span class="cmd">php artisan</span> <span class="param">migrate:fresh --seed</span>
+    </div>
+
+    <!-- MINH HỌA 3: PHPMYADMIN & ERD TABLES -->
+    <div class="illustration-box">
+        <div class="illustration-header">
+            <span>HÌNH 3: CẤU TRÚC BẢNG DỮ LIỆU ĐƯỢC NẠP VÀO DATABASE 'do_an_kho' TRÊN PHPMYADMIN</span>
+            <span style="color: #0284c7;">phpMyAdmin 5.2.x</span>
+        </div>
+        <div class="illustration-body" style="padding: 10px 14px;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 11px;">
+                <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; background: #f8fafc;">
+                    <div style="font-weight: bold; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 4px;">📁 users</div>
+                    <div>• id (PK)</div>
+                    <div>• name, email, role</div>
+                    <div>• password, token</div>
+                </div>
+                <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; background: #f8fafc;">
+                    <div style="font-weight: bold; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 4px;">📁 products</div>
+                    <div>• id (PK), sku, name</div>
+                    <div>• current_stock, min_stock</div>
+                    <div>• purchase_price, unit</div>
+                </div>
+                <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; background: #f8fafc;">
+                    <div style="font-weight: bold; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 4px;">📁 goods_receipts</div>
+                    <div>• id (PK), code</div>
+                    <div>• supplier_id, user_id</div>
+                    <div>• status, total_amount</div>
+                </div>
+                <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; background: #f8fafc;">
+                    <div style="font-weight: bold; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 4px;">📁 goods_issues</div>
+                    <div>• id (PK), code</div>
+                    <div>• customer_name, user_id</div>
+                    <div>• status, total_amount</div>
+                </div>
+                <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; background: #f8fafc;">
+                    <div style="font-weight: bold; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 4px;">📁 inventory_logs</div>
+                    <div>• product_id, change</div>
+                    <div>• before / after qty</div>
+                    <div>• reference_type / id</div>
+                </div>
+                <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; background: #f8fafc;">
+                    <div style="font-weight: bold; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 4px;">📁 categories & suppliers</div>
+                    <div>• id (PK), name</div>
+                    <div>• phone, email, address</div>
+                    <div>• created_at / updated_at</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BƯỚC 3 -->
+    <div class="section-title">
+        <span class="section-number">3</span>
+        <span>Khởi chạy ứng dụng Web (3 Phương Thức Tiện Lợi)</span>
+    </div>
+
+    <div style="margin-bottom: 8px;">
+        <strong>Cách A: Khởi chạy 1-Click bằng công cụ có sẵn (Khuyên dùng - Nhanh nhất)</strong>
+        <p>Truy cập thư mục <code>E:\Laravel_Inventory_Management_System</code> và <strong>click đúp vào file <code>chay_local.bat</code></strong>.</p>
+    </div>
+
+    <!-- MINH HỌA 4: TERMINAL WINDOW -->
+    <div class="illustration-box">
+        <div class="illustration-header">
+            <span>HÌNH 4: CỬA SỔ TERMINAL KHI CHẠY 'chay_local.bat' HOẶC 'php artisan serve'</span>
+            <span style="color: #64748b;">cmd.exe / PowerShell</span>
+        </div>
+        <div class="illustration-body" style="background: #0f172a; color: #f8fafc; font-family: 'Consolas', monospace; font-size: 11px; padding: 12px 14px;">
+            <div style="color: #38bdf8; font-weight: bold;">========================================================</div>
+            <div style="color: #38bdf8; font-weight: bold;">  KHOI DONG HE THONG QUAN LY KHO (LOCAL SERVER)</div>
+            <div style="color: #38bdf8; font-weight: bold;">========================================================</div>
+            <div style="margin-top: 6px; color: #22c55e;">[OK] Tim thay PHP tai C:\xampp\php\php.exe (PHP 8.3.33)</div>
+            <div style="color: #e2e8f0;">May chu Web Server: <span style="color: #facc15; font-weight: bold; text-decoration: underline;">http://127.0.0.1:8000</span></div>
+            <div style="color: #94a3b8;">Nhan Ctrl + C de dung server.</div>
+            <div style="margin-top: 6px; color: #38bdf8;">INFO  Server running on [http://127.0.0.1:8000].</div>
+            <div style="color: #64748b;">Press Ctrl+C to stop the server</div>
+            <div style="margin-top: 4px; color: #a3e635;">2026-10-27 15:30:00 ................................. ~ 14.22ms DONE</div>
+            <div style="color: #38bdf8;">200 OK  GET / ....................................... 1.84ms</div>
+        </div>
+    </div>
+
+    <div style="margin-top: 8px;">
+        <strong>Cách B: Chạy qua Web Server Apache của XAMPP (Không cần chạy artisan serve)</strong>
+        <p>Mở trình duyệt truy cập thẳng: <strong><code>http://localhost/Laravel_Inventory_Management_System/public</code></strong> (hoặc <strong><code>http://localhost/do_an_kho/public</code></strong>).</p>
+    </div>
+
+    <div class="footer">
+        <span>Laravel Inventory Management System • Hướng Dẫn Vận Hành Local</span>
+        <span>Trang 2 / 3</span>
+    </div>
+</div>
+
+<!-- TRANG 3 -->
+<div class="page">
+    <!-- BƯỚC 4 -->
+    <div class="section-title">
+        <span class="section-number">4</span>
+        <span>Đăng nhập và Trải nghiệm Hệ thống</span>
+    </div>
+
+    <p>Truy cập vào <strong><code>http://localhost:8000</code></strong>. Sử dụng danh sách tài khoản mẫu sau để đăng nhập:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 18%;">Vai trò</th>
+                <th style="width: 25%;">Họ & Tên</th>
+                <th style="width: 25%;">Email</th>
+                <th style="width: 15%;">Mật khẩu</th>
+                <th>Phân quyền chính</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong style="color: #b91c1c;">Admin</strong></td>
+                <td>Thái Anh Kiệt</td>
+                <td><code>admin@kho.vn</code></td>
+                <td><code>admin123</code></td>
+                <td>Toàn quyền hệ thống, quản lý User, kiểm kê điều chỉnh kho</td>
+            </tr>
+            <tr>
+                <td><strong style="color: #1d4ed8;">Thủ kho</strong></td>
+                <td>Trần Phúc Khang</td>
+                <td><code>staff@kho.vn</code></td>
+                <td><code>staff123</code></td>
+                <td>Lập phiếu nhập kho, lập phiếu xuất kho, tra cứu tồn</td>
+            </tr>
+            <tr>
+                <td><strong style="color: #475569;">Nhân viên kho</strong></td>
+                <td>Nguyễn Văn An</td>
+                <td><code>nhanvien@kho.vn</code></td>
+                <td><code>password</code></td>
+                <td>Xem danh mục, xem lịch sử biến động kho</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- MINH HỌA 5: MOCKUP GIAO DIỆN ĐĂNG NHẬP QUICK LOGIN -->
+    <div class="illustration-box">
+        <div class="illustration-header">
+            <span>HÌNH 5: GIAO DIỆN ĐĂNG NHẬP HỖ TRỢ PHÍM BẤM 1 CHẠM (QUICK LOGIN)</span>
+            <span style="color: #2563eb;">UI Feature</span>
+        </div>
+        <div class="illustration-body" style="padding: 12px 16px; background: #f8fafc;">
+            <div style="max-width: 480px; margin: 0 auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <div style="text-align: center; margin-bottom: 12px;">
+                    <div style="display: inline-block; background: #2563eb; color: #fff; width: 32px; height: 32px; border-radius: 6px; line-height: 32px; font-weight: bold; font-size: 16px;">📦</div>
+                    <div style="font-weight: bold; font-size: 14px; color: #1e293b; margin-top: 4px;">ĐĂNG NHẬP HỆ THỐNG KHO</div>
+                    <div style="font-size: 11px; color: #64748b;">Hệ Thống Quản Lý Nhập - Xuất - Tồn Kho WMS</div>
+                </div>
+
+                <div style="margin-bottom: 8px;">
+                    <label style="font-size: 11px; font-weight: 600; color: #475569;">Email tài khoản:</label>
+                    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 4px 8px; font-size: 11px; background: #f1f5f9; color: #1e293b; font-family: monospace;">admin@kho.vn</div>
+                </div>
+
+                <div style="margin-bottom: 10px;">
+                    <label style="font-size: 11px; font-weight: 600; color: #475569;">Mật khẩu:</label>
+                    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 4px 8px; font-size: 11px; background: #f1f5f9; color: #1e293b; font-family: monospace;">••••••••</div>
+                </div>
+
+                <div style="background: #eff6ff; border: 1px dashed #3b82f6; border-radius: 6px; padding: 8px; text-align: center; margin-bottom: 10px;">
+                    <div style="font-size: 10px; font-weight: bold; color: #1d4ed8; margin-bottom: 4px;">⚡ NÚT ĐĂNG NHẬP NHANH 1-CHẠM (DEMO CHẤM BÀI):</div>
+                    <div style="display: flex; justify-content: center; gap: 6px;">
+                        <span style="background: #ef4444; color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 9px; font-weight: bold; cursor: pointer;">🔴 Admin</span>
+                        <span style="background: #3b82f6; color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 9px; font-weight: bold; cursor: pointer;">🔵 Thủ Kho</span>
+                        <span style="background: #64748b; color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 9px; font-weight: bold; cursor: pointer;">⚪ Nhân Viên</span>
+                    </div>
+                </div>
+
+                <button style="width: 100%; background: #2563eb; color: #fff; border: none; padding: 6px; border-radius: 4px; font-weight: bold; font-size: 11px;">ĐĂNG NHẬP HỆ THỐNG</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BƯỚC 5: XỬ LÝ SỰ CỐ -->
+    <div class="section-title">
+        <span class="section-number">5</span>
+        <span>Xử lý sự cố thường gặp (Troubleshooting)</span>
+    </div>
+
+    <div class="card card-warning" style="margin-bottom: 8px;">
+        <strong>Lỗi 1: Cổng 80 hoặc 3306 bị chiếm dụng (Port Conflict)</strong><br>
+        <span style="font-size: 11.5px; color: #4b5563;">
+            Nếu Apache không bật được do Skype, IIS hoặc dịch vụ World Wide Web Publishing Service chiếm cổng 80: Mở XAMPP -> Config -> <code>httpd.conf</code> -> Đổi <code>Listen 80</code> thành <code>Listen 8080</code>. Hoặc sử dụng phương thức khởi chạy bằng <code>chay_local.bat</code> (cổng 8000 độc lập).
+        </span>
+    </div>
+
+    <div class="card card-warning" style="margin-bottom: 8px;">
+        <strong>Lỗi 2: Báo lỗi "Access Denied" hoặc "Unknown Database do_an_kho"</strong><br>
+        <span style="font-size: 11.5px; color: #4b5563;">
+            Kiểm tra file <code>.env</code> ở thư mục dự án đã đúng thông tin: <code>DB_HOST=127.0.0.1</code>, <code>DB_PORT=3306</code>, <code>DB_DATABASE=do_an_kho</code>, <code>DB_USERNAME=root</code>, <code>DB_PASSWORD=</code>. Sau đó vào phpMyAdmin tạo cơ sở dữ liệu tên <code>do_an_kho</code>.
+        </span>
+    </div>
+
+    <div class="card card-success" style="margin-bottom: 0;">
+        <strong>Lệnh kiểm thử tự động toàn diện (Automated Unit & Feature Test):</strong><br>
+        <span style="font-size: 11.5px; color: #065f46;">
+            Dự án đã viết sẵn 11 kịch bản kiểm thử (Feature Tests) với 41 khẳng định (Assertions) đạt 100% chuẩn: Chạy <code>php artisan test</code> để kiểm tra tính toàn vẹn của Transaction, Pessimistic Locking và phân quyền RBAC.
+        </span>
+    </div>
+
+    <div class="footer">
+        <span>Laravel Inventory Management System • Hướng Dẫn Vận Hành Local</span>
+        <span>Trang 3 / 3</span>
+    </div>
+</div>
+
+</body>
+</html>
