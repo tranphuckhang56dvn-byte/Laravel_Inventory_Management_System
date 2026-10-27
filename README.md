@@ -44,17 +44,19 @@
 
 ## 🚀 Hướng Dẫn Cài Đặt & Chạy Ứng Dụng Trên XAMPP
 
-### Môi Trường XAMPP
+### Môi Trường Chạy Local (XAMPP & MongoDB)
 * **Thư mục cài đặt XAMPP:** `C:\xampp`
-* **PHP:** `C:\xampp\php` (PHP 8.3)
-* **Cơ sở dữ liệu:** MySQL / MariaDB (Port 3306, Database: `do_an_kho`, User: `root`, Password: rỗng)
-* **Thư mục Web Root:** Dự án đã được liên kết trực tiếp vào `C:\xampp\htdocs\do_an_kho`.
+* **PHP:** `C:\xampp\php` (PHP 8.3 tích hợp sẵn extension `php_mongodb`)
+* **Cơ sở dữ liệu:** **MongoDB** (Port 27017, Database: `laravel_inventory_management_system`, Driver: `mongodb/laravel-mongodb`)
+* **Cơ sở dữ liệu dự phòng:** MySQL / MariaDB (Port 3306, Database: `laravel_inventory_management_system`)
+* **Thư mục Web Root:** Dự án đã được liên kết trực tiếp vào `C:\xampp\htdocs\Laravel_Inventory_Management_System`.
 
 ### Các Bước Khởi Chạy:
-1. Mở **XAMPP Control Panel** (`C:\xampp\xampp-control.exe`), bấm **Start** cho **Apache** và **MySQL**.
-2. **Cách 1 - Nhanh nhất (1-Click):**
+1. Đảm bảo dịch vụ **MongoDB** đang chạy trên máy (Port 27017) hoặc sử dụng MongoDB Atlas connection string.
+2. Mở **XAMPP Control Panel** (`C:\xampp\xampp-control.exe`), bấm **Start** cho **Apache**.
+3. **Cách 1 - Nhanh nhất (1-Click):**
    - Click đúp vào file [`chay_local.bat`](./chay_local.bat) ngay tại thư mục dự án `E:\Laravel_Inventory_Management_System`.
-3. **Cách 2 - Chạy qua PowerShell/CMD:**
+4. **Cách 2 - Chạy qua PowerShell/CMD:**
    - Mở PowerShell tại thư mục dự án `E:\Laravel_Inventory_Management_System`:
    ```powershell
    # Nạp đường dẫn PHP & Git của XAMPP
@@ -66,7 +68,7 @@
 
 Truy cập hệ thống tại: **`http://localhost:8000`**
 
-*(Hoặc truy cập trực tiếp qua máy chủ Apache của XAMPP tại: `http://localhost/Laravel_Inventory_Management_System/public` hoặc `http://localhost/do_an_kho/public`)*
+*(Hoặc truy cập trực tiếp qua máy chủ Apache của XAMPP tại: `http://localhost/Laravel_Inventory_Management_System/public`)*
 
 ---
 

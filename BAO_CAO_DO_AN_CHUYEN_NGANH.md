@@ -202,14 +202,15 @@ Cơ sở dữ liệu bao gồm 8 bảng chính được chuẩn hóa mức 3NF:
 ## CHƯƠNG 4: HIỆN THỰC HỆ THỐNG & KẾT QUẢ ĐẠT ĐƯỢC
 
 ### 4.1. Môi trường triển khai & Kiến trúc thư mục mã nguồn
-* **Môi trường Web Server:** XAMPP (`C:\xampp`) tích hợp Apache và MariaDB/MySQL 10.4.
-* **Cơ sở dữ liệu:** Database `do_an_kho` trên MySQL (Port 3306), bảng mã `utf8mb4_unicode_ci`.
-* **Thư mục Web Root:** Đã cấu hình Directory Junction liên kết trực tiếp vào `C:\xampp\htdocs\do_an_kho`.
+* **Môi trường Web Server:** XAMPP (`C:\xampp`) tích hợp Apache và PHP 8.3 (đã nạp extension `php_mongodb`).
+* **Cơ sở dữ liệu chính:** **MongoDB** (Port 27017, Database: `laravel_inventory_management_system`, Driver: `mongodb/laravel-mongodb` v5.12).
+* **Cơ sở dữ liệu dự phòng:** MySQL / MariaDB (Port 3306) trên XAMPP.
+* **Thư mục Web Root:** Đã cấu hình Directory Junction liên kết trực tiếp vào `C:\xampp\htdocs\Laravel_Inventory_Management_System`.
 
 Hệ thống được tổ chức chuyên nghiệp, tuân thủ nghiêm ngặt quy ước chuẩn của Laravel 11/12 và PSR-12:
 
 ```
-E:\do_an_kho\
+E:\Laravel_Inventory_Management_System\
 ├── app\
 │   ├── Http\
 │   │   ├── Controllers\

@@ -208,7 +208,7 @@
         <div class="meta-badges">
             <span class="badge">Laravel 11 / 13</span>
             <span class="badge">PHP 8.3 (XAMPP)</span>
-            <span class="badge">MySQL / MariaDB</span>
+            <span class="badge">MongoDB (NoSQL) & MySQL Backup</span>
             <span class="badge">Tác giả: Thái Anh Kiệt & Trần Phúc Khang</span>
             <span class="badge">Đồ Án Chuyên Ngành CNTT</span>
         </div>
@@ -218,9 +218,10 @@
         <strong>Tóm tắt cấu hình môi trường chuẩn:</strong>
         <ul style="margin-top: 6px; margin-bottom: 0;">
             <li><strong>Thư mục mã nguồn thực tế:</strong> <code>E:\Laravel_Inventory_Management_System</code></li>
-            <li><strong>Thư mục cài đặt XAMPP:</strong> <code>C:\xampp</code> (PHP tại: <code>C:\xampp\php\php.exe</code>)</li>
-            <li><strong>Thư mục Web Root (Junction):</strong> <code>C:\xampp\htdocs\Laravel_Inventory_Management_System</code> và <code>C:\xampp\htdocs\do_an_kho</code></li>
-            <li><strong>Cơ sở dữ liệu:</strong> MySQL Port 3306, Database: <code>do_an_kho</code>, User: <code>root</code>, Password: <em>(để trống)</em></li>
+            <li><strong>Thư mục cài đặt XAMPP:</strong> <code>C:\xampp</code> (PHP 8.3 tại: <code>C:\xampp\php\php.exe</code>, đã kích hoạt extension <code>php_mongodb</code>)</li>
+            <li><strong>Thư mục Web Root (Junction):</strong> <code>C:\xampp\htdocs\Laravel_Inventory_Management_System</code></li>
+            <li><strong>Cơ sở dữ liệu chính:</strong> <strong>MongoDB</strong> Port 27017, Database: <code>laravel_inventory_management_system</code> (Driver: <code>mongodb/laravel-mongodb</code> v5.12)</li>
+            <li><strong>Cơ sở dữ liệu dự phòng:</strong> MySQL / MariaDB Port 3306 trên XAMPP</li>
         </ul>
     </div>
 
@@ -254,7 +255,7 @@
                 <text x="287" y="66" font-family="'Segoe UI', sans-serif" font-size="10" fill="#475569" text-anchor="middle">E:\Laravel_Inventory...</text>
                 <line x1="210" y1="75" x2="365" y2="75" stroke="#cbd5e1" stroke-width="1"/>
                 <text x="287" y="93" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="middle">Directory Junction</text>
-                <text x="287" y="110" font-family="'Segoe UI', sans-serif" font-size="9" fill="#64748b" text-anchor="middle">C:\xampp\htdocs\do_an_kho</text>
+                <text x="287" y="110" font-family="'Segoe UI', sans-serif" font-size="9" fill="#64748b" text-anchor="middle">C:\xampp\htdocs\Laravel_Inventory_...</text>
 
                 <!-- Arrow 2 -->
                 <path d="M 375 75 L 410 75" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
@@ -337,23 +338,23 @@
     <!-- BƯỚC 2 -->
     <div class="section-title">
         <span class="section-number">2</span>
-        <span>Kiểm tra Cơ sở dữ liệu MySQL trên phpMyAdmin</span>
+        <span>Cấu hình Cơ sở dữ liệu: MongoDB (Chính) & MySQL (Dự phòng)</span>
     </div>
-    <p>1. Mở trình duyệt web và truy cập địa chỉ: <strong><code>http://localhost/phpmyadmin</code></strong></p>
-    <p>2. Đảm bảo Database <strong><code>do_an_kho</code></strong> đã được tạo. Nếu tạo mới, chọn bảng mã <code>utf8mb4_unicode_ci</code>.</p>
-    <p>3. Trong trường hợp muốn nạp lại dữ liệu trắng chuẩn mẫu (Clean State), chạy lệnh sau trong Terminal:</p>
+    <p>1. <strong>Đối với MongoDB (NoSQL):</strong> Khởi chạy MongoDB Community Server (Port <code>27017</code>). Đảm bảo MongoDB đang lắng nghe tại <code>127.0.0.1:27017</code> (có thể quản lý trực quan qua <strong>MongoDB Compass</strong>). Database sẽ tự động khởi tạo khi có dữ liệu.</p>
+    <p>2. <strong>Cấu hình Extension PHP:</strong> XAMPP PHP 8.3 đã được tích hợp sẵn file <code>C:\xampp\php\ext\php_mongodb.dll</code> và kích hoạt <code>extension=mongodb</code> trong <code>php.ini</code>.</p>
+    <p>3. Trong trường hợp muốn nạp dữ liệu mẫu ban đầu (Clean State), chạy lệnh sau trong Terminal:</p>
     <div class="code-block">
         <span class="comment"># Thiết lập biến môi trường PHP của XAMPP</span><br>
         <span class="cmd">$env:Path</span> = <span class="param">"C:\xampp\php;C:\Program Files\Git\cmd;"</span> + <span class="cmd">$env:Path</span><br>
-        <span class="comment"># Khởi tạo lại bảng và nạp Seeder</span><br>
-        <span class="cmd">php artisan</span> <span class="param">migrate:fresh --seed</span>
+        <span class="comment"># Khởi tạo dữ liệu mẫu Seeder</span><br>
+        <span class="cmd">php artisan</span> <span class="param">db:seed</span>
     </div>
 
-    <!-- MINH HỌA 3: PHPMYADMIN & ERD TABLES -->
+    <!-- MINH HỌA 3: MONGODB COLLECTIONS -->
     <div class="illustration-box">
         <div class="illustration-header">
-            <span>HÌNH 3: CẤU TRÚC BẢNG DỮ LIỆU ĐƯỢC NẠP VÀO DATABASE 'do_an_kho' TRÊN PHPMYADMIN</span>
-            <span style="color: #0284c7;">phpMyAdmin 5.2.x</span>
+            <span>HÌNH 3: CẤU TRÚC COLLECTIONS / TABLES TRONG 'laravel_inventory_management_system' (MONGODB / PHPMYADMIN)</span>
+            <span style="color: #10b981;">MongoDB 7.x & MySQL 8.x</span>
         </div>
         <div class="illustration-body" style="padding: 10px 14px;">
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 11px;">
@@ -430,7 +431,7 @@
 
     <div style="margin-top: 8px;">
         <strong>Cách B: Chạy qua Web Server Apache của XAMPP (Không cần chạy artisan serve)</strong>
-        <p>Mở trình duyệt truy cập thẳng: <strong><code>http://localhost/Laravel_Inventory_Management_System/public</code></strong> (hoặc <strong><code>http://localhost/do_an_kho/public</code></strong>).</p>
+        <p>Mở trình duyệt truy cập thẳng: <strong><code>http://localhost/Laravel_Inventory_Management_System/public</code></strong>.</p>
     </div>
 
     <div class="footer">
@@ -536,9 +537,9 @@
     </div>
 
     <div class="card card-warning" style="margin-bottom: 8px;">
-        <strong>Lỗi 2: Báo lỗi "Access Denied" hoặc "Unknown Database do_an_kho"</strong><br>
+        <strong>Lỗi 2: Báo lỗi "Access Denied" hoặc "Unknown Database laravel_inventory_management_system"</strong><br>
         <span style="font-size: 11.5px; color: #4b5563;">
-            Kiểm tra file <code>.env</code> ở thư mục dự án đã đúng thông tin: <code>DB_HOST=127.0.0.1</code>, <code>DB_PORT=3306</code>, <code>DB_DATABASE=do_an_kho</code>, <code>DB_USERNAME=root</code>, <code>DB_PASSWORD=</code>. Sau đó vào phpMyAdmin tạo cơ sở dữ liệu tên <code>do_an_kho</code>.
+            Kiểm tra file <code>.env</code> ở thư mục dự án đã đúng thông tin: <code>DB_HOST=127.0.0.1</code>, <code>DB_PORT=3306</code>, <code>DB_DATABASE=laravel_inventory_management_system</code>, <code>DB_USERNAME=root</code>, <code>DB_PASSWORD=</code>. Sau đó vào phpMyAdmin tạo cơ sở dữ liệu tên <code>laravel_inventory_management_system</code>.
         </span>
     </div>
 
