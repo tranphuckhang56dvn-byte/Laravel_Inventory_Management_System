@@ -156,7 +156,7 @@
                             <tr>
                                 <td><span class="badge bg-warning text-dark">POST</span></td>
                                 <td><code>/api/products/{id}/adjust-stock</code></td>
-                                <td>Kiểm kê / Điều chỉnh tồn kho với Pessimistic Locking (Admin)</td>
+                                <td>Kiểm kê / Điều chỉnh tồn kho với Pessimistic Locking (Admin &amp; Thủ kho)</td>
                             </tr>
                         </tbody>
                     </table>

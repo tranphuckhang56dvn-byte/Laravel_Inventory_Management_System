@@ -39,8 +39,9 @@ Route::middleware('auth')->group(function () {
     // Cảnh báo tồn kho dưới ngưỡng an toàn
     Route::get('/products/low-stock', [ProductController::class, 'lowStock'])->name('products.low-stock');
 
-    // Danh mục dữ liệu - Tra cứu (Staff + Admin)
+    // Danh mục dữ liệu - Tra cứu & Kiểm kê (Staff + Admin)
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::post('/products/{product}/adjust-stock', [ProductController::class, 'adjustStock'])->name('products.adjust-stock');
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
 
@@ -51,7 +52,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
         Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
         Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
-        Route::post('/products/{product}/adjust-stock', [ProductController::class, 'adjustStock'])->name('products.adjust-stock');
 
         Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
         Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');

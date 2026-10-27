@@ -35,9 +35,10 @@ Route::middleware(['auth:sanctum,web'])->group(function () {
     // Cảnh báo tồn kho thấp
     Route::get('/products/low-stock', [ProductController::class, 'lowStock']);
 
-    // Danh mục dữ liệu - Tra cứu (Staff + Admin)
+    // Danh mục dữ liệu - Tra cứu & Kiểm kê (Staff + Admin)
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/{product}', [ProductController::class, 'show']);
+    Route::post('/products/{product}/adjust-stock', [ProductController::class, 'adjustStock']);
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::get('/categories/{category}', [CategoryController::class, 'show']);
     Route::get('/suppliers', [SupplierController::class, 'index']);
@@ -48,7 +49,6 @@ Route::middleware(['auth:sanctum,web'])->group(function () {
         Route::post('/products', [ProductController::class, 'store']);
         Route::put('/products/{product}', [ProductController::class, 'update']);
         Route::delete('/products/{product}', [ProductController::class, 'destroy']);
-        Route::post('/products/{product}/adjust-stock', [ProductController::class, 'adjustStock']);
 
         Route::post('/categories', [CategoryController::class, 'store']);
         Route::put('/categories/{category}', [CategoryController::class, 'update']);

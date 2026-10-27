@@ -334,4 +334,28 @@ class InventorySystemTest extends TestCase
         $this->actingAs($this->admin)->get('/products/create')->assertStatus(200);
         $this->actingAs($this->admin)->get('/products/'.$this->product->id.'/edit')->assertStatus(200);
     }
+
+    /**
+     * Test Nhân viên (Staff) cũng có thể thực hiện kiểm kê / điều chỉnh tồn kho
+     */
+    public function test_staff_can_adjust_stock(): void
+    {
+        $response = $this->actingAs($this->staff)
+            ->post('/products/'.$this->product->id.'/adjust-stock', [
+                'new_stock' => 12,
+                'reason' => 'Thủ kho kiểm kê định kỳ',
+            ]);
+
+        $response->assertRedirect();
+
+        $this->product->refresh();
+        $this->assertEquals(12, $this->product->current_stock);
+
+        $this->assertDatabaseHas('inventory_logs', [
+            'product_id' => $this->product->id,
+            'user_id' => $this->staff->id,
+            'type' => 'adjust',
+            'quantity_after' => 12,
+        ]);
+    }
 }

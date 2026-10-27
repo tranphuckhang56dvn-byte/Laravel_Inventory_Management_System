@@ -130,18 +130,18 @@
                                             <i class="fa-solid fa-eye text-primary me-2"></i> Chi tiết & Lịch sử
                                         </a>
                                     </li>
+                                    <li>
+                                        <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#adjustModal{{ $product->id }}">
+                                            <i class="fa-solid fa-sliders text-warning me-2"></i> Kiểm kê / Điều chỉnh
+                                        </button>
+                                    </li>
                                     @if(auth()->user()->isAdmin())
+                                        <li><hr class="dropdown-divider"></li>
                                         <li>
                                             <a class="dropdown-item" href="{{ route('products.edit', $product) }}">
                                                 <i class="fa-solid fa-pen-to-square text-info me-2"></i> Chỉnh sửa
                                             </a>
                                         </li>
-                                        <li>
-                                            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#adjustModal{{ $product->id }}">
-                                                <i class="fa-solid fa-sliders text-warning me-2"></i> Kiểm kê / Điều chỉnh
-                                            </button>
-                                        </li>
-                                        <li><hr class="dropdown-divider"></li>
                                         <li>
                                             <form id="delete-product-{{ $product->id }}" method="POST" action="{{ route('products.destroy', $product) }}" class="m-0">
                                                 @csrf
