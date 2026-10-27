@@ -52,19 +52,21 @@
 
 ### Các Bước Khởi Chạy:
 1. Mở **XAMPP Control Panel** (`C:\xampp\xampp-control.exe`), bấm **Start** cho **Apache** và **MySQL**.
-2. Mở PowerShell hoặc CMD tại thư mục dự án `E:\do_an_kho` (hoặc `C:\xampp\htdocs\do_an_kho`):
+2. **Cách 1 - Nhanh nhất (1-Click):**
+   - Click đúp vào file [`chay_local.bat`](./chay_local.bat) ngay tại thư mục dự án `E:\Laravel_Inventory_Management_System`.
+3. **Cách 2 - Chạy qua PowerShell/CMD:**
+   - Mở PowerShell tại thư mục dự án `E:\Laravel_Inventory_Management_System`:
+   ```powershell
+   # Nạp đường dẫn PHP & Git của XAMPP
+   $env:Path = "C:\xampp\php;C:\Program Files\Git\cmd;" + $env:Path
 
-```powershell
-# Nạp đường dẫn PHP & Git của máy
-$env:Path = "C:\xampp\php;C:\Program Files\Git\cmd;" + $env:Path
-
-# Khởi chạy server phát triển
-php artisan serve
-```
+   # Khởi chạy server phát triển
+   php artisan serve
+   ```
 
 Truy cập hệ thống tại: **`http://localhost:8000`**
 
-*(Hoặc truy cập trực tiếp qua máy chủ Apache của XAMPP tại: `http://localhost/do_an_kho/public`)*
+*(Hoặc truy cập trực tiếp qua máy chủ Apache của XAMPP tại: `http://localhost/Laravel_Inventory_Management_System/public` hoặc `http://localhost/do_an_kho/public`)*
 
 ---
 
