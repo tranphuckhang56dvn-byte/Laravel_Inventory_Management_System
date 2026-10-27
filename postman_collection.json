@@ -1,0 +1,270 @@
+{
+  "info": {
+    "name": "WMS - Hệ Thống Quản Lý Nhập Xuất Tồn Kho (Laravel API)",
+    "description": "Bộ sưu tập Postman kiểm thử RESTful API - Đồ án: Thái Anh Kiệt & Trần Phúc Khang (25C2-LTM1)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Authentication (Xác thực)",
+      "item": [
+        {
+          "name": "Login - Admin (Lấy Token)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.access_token) {",
+                  "    pm.collectionVariables.set('token', jsonData.access_token);",
+                  "    console.log('Token saved:', jsonData.access_token);",
+                  "}",
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@kho.vn\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Login - Staff",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"staff@kho.vn\",\n  \"password\": \"staff123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Get Current User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth", "me"] }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/auth/logout", "host": ["{{baseUrl}}"], "path": ["auth", "logout"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Dashboard & Stats",
+      "item": [
+        {
+          "name": "Get Dashboard Stats & Charts",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/dashboard/stats", "host": ["{{baseUrl}}"], "path": ["dashboard", "stats"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Products (Quản lý Sản phẩm)",
+      "item": [
+        {
+          "name": "List Products (Có lọc & phân trang)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products?keyword=&per_page=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["products"],
+              "query": [
+                { "key": "keyword", "value": "" },
+                { "key": "per_page", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Low Stock Products (Cảnh báo tồn thấp)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/products/low-stock", "host": ["{{baseUrl}}"], "path": ["products", "low-stock"] }
+          }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sku\": \"SP-VGA-3060\",\n  \"barcode\": \"893850123999\",\n  \"name\": \"Card Màn Hình ASUS Dual GeForce RTX 3060 12GB GDDR6\",\n  \"category_id\": 2,\n  \"supplier_id\": 1,\n  \"unit\": \"Chiếc\",\n  \"purchase_price\": 6800000,\n  \"selling_price\": 7990000,\n  \"min_stock\": 3,\n  \"max_stock\": 50,\n  \"description\": \"Bảo hành 36 tháng chính hãng ASUS.\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        },
+        {
+          "name": "Get Product Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/products/1", "host": ["{{baseUrl}}"], "path": ["products", "1"] }
+          }
+        },
+        {
+          "name": "Stock Adjustment (Kiểm kê - Pessimistic Lock)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"new_stock\": 50,\n  \"reason\": \"Kiểm kê thực tế định kỳ\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/products/1/adjust-stock", "host": ["{{baseUrl}}"], "path": ["products", "1", "adjust-stock"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Goods Receipt (Nhập Kho)",
+      "item": [
+        {
+          "name": "List Goods Receipts",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/goods-receipts", "host": ["{{baseUrl}}"], "path": ["goods-receipts"] }
+          }
+        },
+        {
+          "name": "Create Goods Receipt (Transaction + Lock)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"supplier_id\": 1,\n  \"receipt_date\": \"2026-10-27\",\n  \"note\": \"Nhập hàng theo đơn PO-1029\",\n  \"items\": [\n    {\n      \"product_id\": 1,\n      \"quantity\": 10,\n      \"unit_price\": 850000,\n      \"note\": \"Hàng nguyên đai kiện\"\n    }\n  ]\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/goods-receipts", "host": ["{{baseUrl}}"], "path": ["goods-receipts"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Goods Issue (Xuất Kho)",
+      "item": [
+        {
+          "name": "List Goods Issues",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/goods-issues", "host": ["{{baseUrl}}"], "path": ["goods-issues"] }
+          }
+        },
+        {
+          "name": "Create Goods Issue (Transaction + Lock + Check Tồn)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_name\": \"Công ty Thiết bị Văn phòng Thủ Đô\",\n  \"issue_date\": \"2026-10-27\",\n  \"reason\": \"Xuất bán\",\n  \"note\": \"Hợp đồng cung cấp số 09/2026\",\n  \"items\": [\n    {\n      \"product_id\": 1,\n      \"quantity\": 5,\n      \"unit_price\": 1100000\n    }\n  ]\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/goods-issues", "host": ["{{baseUrl}}"], "path": ["goods-issues"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Inventory Audit Logs (Nhật Ký Biến Động)",
+      "item": [
+        {
+          "name": "Get Inventory Logs (Audit Trail)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/inventory-logs", "host": ["{{baseUrl}}"], "path": ["inventory-logs"] }
+          }
+        }
+      ]
+    }
+  ]
+}
