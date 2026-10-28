@@ -15,118 +15,8 @@
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <style>
-        :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --sidebar-bg: #0f172a;
-            --sidebar-hover: #1e293b;
-            --sidebar-text: #94a3b8;
-            --sidebar-active: #38bdf8;
-            --body-bg: #f8fafc;
-        }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--body-bg);
-            color: #1e293b;
-            min-height: 100vh;
-        }
-        #sidebar {
-            width: 260px;
-            background-color: var(--sidebar-bg);
-            min-height: 100vh;
-            transition: all 0.3s;
-            z-index: 1000;
-        }
-        #sidebar .nav-link {
-            color: var(--sidebar-text);
-            font-size: 0.92rem;
-            font-weight: 500;
-            padding: 11px 18px;
-            border-radius: 8px;
-            margin: 3px 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.2s ease;
-        }
-        #sidebar .nav-link:hover {
-            color: #ffffff;
-            background-color: var(--sidebar-hover);
-        }
-        #sidebar .nav-link.active {
-            color: #ffffff;
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
-        }
-        .main-content {
-            flex: 1;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .topbar {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 12px 28px;
-        }
-        .card-custom {
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-            background-color: #ffffff;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .card-stat {
-            border-radius: 14px;
-            border: none;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-        }
-        .table-custom th {
-            background-color: #f8fafc;
-            color: #475569;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 12px 16px;
-        }
-        .table-custom td {
-            padding: 14px 16px;
-            vertical-align: middle;
-            border-bottom: 1px solid #f1f5f9;
-        }
-        .badge-subtle-success { background-color: #dcfce7; color: #166534; font-weight: 600; }
-        .badge-subtle-warning { background-color: #fef9c3; color: #854d0e; font-weight: 600; }
-        .badge-subtle-danger  { background-color: #fee2e2; color: #991b1b; font-weight: 600; }
-        .badge-subtle-primary { background-color: #dbeafe; color: #1e40af; font-weight: 600; }
-        .badge-subtle-info    { background-color: #e0f2fe; color: #0369a1; font-weight: 600; }
-        .badge-subtle-dark    { background-color: #f1f5f9; color: #334155; font-weight: 600; }
-        .btn-primary {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            border: none;
-            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
-        }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-        }
-        @media print {
-            #sidebar, .topbar, .btn, .no-print {
-                display: none !important;
-            }
-            .main-content {
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            .card-custom {
-                border: none !important;
-                box-shadow: none !important;
-            }
-        }
-    </style>
+    <!-- App Custom CSS -->
+    <link href="{{ asset('css/app-custom.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
 <body>
@@ -330,25 +220,8 @@
 
     <!-- Bootstrap 5 Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Xác nhận xóa với SweetAlert2
-        function confirmDelete(formId, message = 'Bạn có chắc chắn muốn xóa bản ghi này không?') {
-            Swal.fire({
-                title: 'Xác nhận xóa?',
-                text: message,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#ef4444',
-                cancelButtonColor: '#64748b',
-                confirmButtonText: 'Đồng ý xóa',
-                cancelButtonText: 'Hủy bỏ'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(formId).submit();
-                }
-            });
-        }
-    </script>
+    <!-- App Custom JS -->
+    <script src="{{ asset('js/app-custom.js') }}"></script>
     @yield('scripts')
 </body>
 </html>
