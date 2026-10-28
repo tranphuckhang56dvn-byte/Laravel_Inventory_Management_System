@@ -39,7 +39,7 @@ Nhóm sinh viên thực hiện xin chân thành gửi lời cảm ơn sâu sắc
 ## CHƯƠNG 1: TỔNG QUAN & KHẢO SÁT BÀI TOÁN THỰC TẾ
 
 ### 1.1. Lý do chọn đề tài
-Quản lý kho là mắt xích sống còn của mọi doanh nghiệp thương mại, sản xuất và logistics. Một hệ thống quản lý kho (WMS - Warehouse Management System) hiệu quả không chỉ giúp nắm bắt chính xác số lượng hàng hóa sẵn có theo thời gian thực mà còn đảm bảo tối ưu chi phí lưu kho, tránh tình trạng đứt gãy nguồn hàng hoặc ứ đọng vốn.
+Quản lý kho là mắt xích sống còn của mọi doanh nghiệp thương mại, sản xuất và logistics. Một hệ thống quản lý tồn kho (IMS - Inventory Management System) hiệu quả không chỉ giúp nắm bắt chính xác số lượng hàng hóa sẵn có theo thời gian thực mà còn đảm bảo tối ưu chi phí lưu kho, tránh tình trạng đứt gãy nguồn hàng hoặc ứ đọng vốn.
 
 ### 1.2. Vấn đề thực tế cần giải quyết
 1. **Xung đột giao dịch đồng thời (Concurrency & Race Condition):** Khi hai hoặc nhiều thủ kho cùng thực hiện xuất hoặc nhập cho cùng một mặt hàng tại cùng một thời điểm, nếu không có cơ chế khóa (locking) bản ghi, hệ thống sẽ đọc số liệu cũ, dẫn đến tình trạng số liệu ghi đè sai lệch và nguy hiểm nhất là **âm kho**.
@@ -92,7 +92,7 @@ Sử dụng thư viện **Chart.js** để hiển thị các biểu đồ tươn
 
 ```
 +-------------------------------------------------------------------------------+
-|                            HỆ THỐNG QUẢN LÝ KHO WMS                           |
+|                            HỆ THỐNG QUẢN LÝ KHO IMS                           |
 +-------------------------------------------------------------------------------+
 |                                                                               |
 |   [Thủ Kho / Staff]                                                           |

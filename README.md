@@ -1,4 +1,4 @@
-# Hệ Thống Quản Lý Nhập - Xuất - Tồn Kho (WMS)
+# Hệ Thống Quản Lý Nhập - Xuất - Tồn Kho (IMS - Inventory Management System)
 > **Đồ Án Chuyên Ngành Ngành Lập Trình Máy Tính**  
 > **Ứng dụng Laravel Framework & RESTful API (Chạy trên môi trường XAMPP)**
 

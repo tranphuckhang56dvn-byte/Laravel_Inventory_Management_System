@@ -21,7 +21,7 @@
             <!-- Header Phiếu -->
             <div class="row border-bottom pb-4 mb-4">
                 <div class="col-sm-7">
-                    <h5 class="fw-bold text-dark mb-1">CÔNG TY QUẢN LÝ KHO VẬN WMS</h5>
+                    <h5 class="fw-bold text-dark mb-1">CÔNG TY QUẢN LÝ KHO HÀNG IMS</h5>
                     <p class="text-muted small mb-1">Địa chỉ: KCN Tân Bình, Tây Thạnh, Tân Phú, TP. Hồ Chí Minh</p>
                     <p class="text-muted small mb-0">Hotline: 028 7300 xxxx | Email: info@kho.vn</p>
                 </div>

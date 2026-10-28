@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập - Hệ Thống Quản Lý Kho WMS</title>
+    <title>Đăng nhập - Hệ Thống Quản Lý Kho IMS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
                 <i class="fa-solid fa-boxes-stacked fa-2x"></i>
             </div>
             <h4 class="fw-bold text-dark mb-1">ĐĂNG NHẬP HỆ THỐNG</h4>
-            <p class="text-muted small">Quản lý Nhập - Xuất - Tồn Kho (WMS Laravel)</p>
+            <p class="text-muted small">Quản lý Nhập - Xuất - Tồn Kho (IMS Laravel)</p>
         </div>
 
         @if($errors->any())

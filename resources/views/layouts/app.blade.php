@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Hệ Thống Quản Lý Kho') - WMS Laravel</title>
+    <title>@yield('title', 'Hệ Thống Quản Lý Kho') - IMS Laravel</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome 6 Icons -->
@@ -28,7 +28,7 @@
                     <i class="fa-solid fa-boxes-stacked fs-5"></i>
                 </div>
                 <div>
-                    <h6 class="mb-0 fw-bold tracking-tight">KHO VẬN WMS</h6>
+                    <h6 class="mb-0 fw-bold tracking-tight">KHO HÀNG IMS</h6>
                     <small class="text-secondary" style="font-size: 0.75rem;">Laravel 11 & RESTful API</small>
                 </div>
             </div>
