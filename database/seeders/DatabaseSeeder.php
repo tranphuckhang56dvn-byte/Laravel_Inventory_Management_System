@@ -275,18 +275,24 @@ class DatabaseSeeder extends Seeder
             $createdProducts[] = Product::create($pData);
         }
 
-        // 5. Tạo dữ liệu Phiếu nhập và Phiếu xuất mẫu (Lịch sử giao dịch 3 tháng gần nhất)
+        // 5. Tạo dữ liệu Phiếu nhập và Phiếu xuất mẫu (luôn nằm trước thời điểm hiện tại)
         $today = Carbon::now();
+        $pn1At = $today->copy()->subDays(33);
+        $pn2At = $today->copy()->subDays(10);
+        $px1At = $today->copy()->subDays(6);
+        $adjAt = $today->copy()->subDays(2);
 
-        // Giao dịch tháng trước
+        // Giao dịch tháng trước (10/10/2026)
         $pn1 = GoodsReceipt::create([
-            'code' => 'PN-20260910-0001',
+            'code' => 'PN-'.$pn1At->format('Ymd').'-0001',
             'supplier_id' => $supMaiHoang->id,
             'user_id' => $staff1->id,
-            'receipt_date' => $today->copy()->subMonths(1)->day(10)->toDateString(),
+            'receipt_date' => $pn1At->toDateString(),
             'total_amount' => 42500000,
             'status' => 'completed',
             'note' => 'Nhập lô SSD Kingston 512GB và RAM Corsair phục vụ dự án đối tác',
+            'created_at' => $pn1At->copy()->setTime(8, 30, 0),
+            'updated_at' => $pn1At->copy()->setTime(8, 30, 0),
         ]);
 
         GoodsReceiptItem::create([
@@ -319,7 +325,8 @@ class DatabaseSeeder extends Seeder
             'quantity_after' => 45,
             'unit_price' => 850000,
             'note' => 'Nhập kho theo phiếu '.$pn1->code,
-            'created_at' => $today->copy()->subMonths(1)->day(10),
+            'created_at' => $pn1At->copy()->setTime(8, 35, 12),
+            'updated_at' => $pn1At->copy()->setTime(8, 35, 12),
         ]);
 
         InventoryLog::create([
@@ -334,18 +341,21 @@ class DatabaseSeeder extends Seeder
             'quantity_after' => 30,
             'unit_price' => 850000,
             'note' => 'Nhập kho theo phiếu '.$pn1->code,
-            'created_at' => $today->copy()->subMonths(1)->day(10),
+            'created_at' => $pn1At->copy()->setTime(9, 12, 45),
+            'updated_at' => $pn1At->copy()->setTime(9, 12, 45),
         ]);
 
-        // Phiếu nhập tháng này
+        // Phiếu nhập tháng này (02/11/2026)
         $pn2 = GoodsReceipt::create([
-            'code' => 'PN-20261015-0002',
+            'code' => 'PN-'.$pn2At->format('Ymd').'-0002',
             'supplier_id' => $supFPT->id,
             'user_id' => $admin->id,
-            'receipt_date' => $today->copy()->day(15)->toDateString(),
+            'receipt_date' => $pn2At->toDateString(),
             'total_amount' => 18400000,
             'status' => 'completed',
             'note' => 'Nhập bổ sung Router Wifi 6 TP-Link AX23',
+            'created_at' => $pn2At->copy()->setTime(14, 15, 0),
+            'updated_at' => $pn2At->copy()->setTime(14, 15, 0),
         ]);
 
         GoodsReceiptItem::create([
@@ -369,19 +379,22 @@ class DatabaseSeeder extends Seeder
             'quantity_after' => 22,
             'unit_price' => 920000,
             'note' => 'Nhập kho theo phiếu '.$pn2->code,
-            'created_at' => $today->copy()->day(15),
+            'created_at' => $pn2At->copy()->setTime(14, 20, 18),
+            'updated_at' => $pn2At->copy()->setTime(14, 20, 18),
         ]);
 
-        // Phiếu xuất tháng này
+        // Phiếu xuất tháng này (06/11/2026)
         $px1 = GoodsIssue::create([
-            'code' => 'PX-20261020-0001',
+            'code' => 'PX-'.$px1At->format('Ymd').'-0001',
             'customer_name' => 'Công ty Cổ phần Giải pháp Phần mềm ABC',
             'user_id' => $staff1->id,
-            'issue_date' => $today->copy()->day(20)->toDateString(),
+            'issue_date' => $px1At->toDateString(),
             'total_amount' => 15700000,
             'status' => 'completed',
             'reason' => 'Xuất bán',
             'note' => 'Giao hàng đợt 1 nâng cấp phòng IT',
+            'created_at' => $px1At->copy()->setTime(10, 10, 0),
+            'updated_at' => $px1At->copy()->setTime(10, 10, 0),
         ]);
 
         GoodsIssueItem::create([
@@ -414,7 +427,8 @@ class DatabaseSeeder extends Seeder
             'quantity_after' => 45,
             'unit_price' => 1100000,
             'note' => 'Xuất kho theo phiếu '.$px1->code,
-            'created_at' => $today->copy()->day(20),
+            'created_at' => $px1At->copy()->setTime(10, 15, 27),
+            'updated_at' => $px1At->copy()->setTime(10, 15, 27),
         ]);
 
         InventoryLog::create([
@@ -429,23 +443,25 @@ class DatabaseSeeder extends Seeder
             'quantity_after' => 18,
             'unit_price' => 1175000,
             'note' => 'Xuất kho theo phiếu '.$px1->code,
-            'created_at' => $today->copy()->day(20),
+            'created_at' => $px1At->copy()->setTime(15, 42, 53),
+            'updated_at' => $px1At->copy()->setTime(15, 42, 53),
         ]);
 
-        // Tạo log kiểm kê điều chỉnh kho
+        // Tạo log kiểm kê điều chỉnh kho (10/11/2026)
         InventoryLog::create([
             'product_id' => $createdProducts[2]->id, // Chuột G102
             'user_id' => $admin->id,
             'type' => 'adjust',
             'reference_type' => 'adjustment',
             'reference_id' => null,
-            'reference_code' => 'ADJ-20261025-001',
+            'reference_code' => 'ADJ-'.$adjAt->format('Ymd').'-001',
             'quantity_before' => 5,
             'quantity_change' => -2,
             'quantity_after' => 3,
             'unit_price' => 310000,
             'note' => 'Kiểm kê định kỳ: Trừ 2 con chuột lỗi bao bì gửi bảo hành',
-            'created_at' => $today->copy()->day(25),
+            'created_at' => $adjAt->copy()->setTime(16, 48, 30),
+            'updated_at' => $adjAt->copy()->setTime(16, 48, 30),
         ]);
     }
 }

@@ -20,17 +20,23 @@
     @yield('styles')
 </head>
 <body>
-    <div class="d-flex">
+    <div class="d-flex app-shell">
+        <!-- Mobile Sidebar Backdrop -->
+        <div id="sidebarBackdrop" class="sidebar-backdrop d-lg-none"></div>
+
         <!-- Sidebar Navigation -->
         <aside id="sidebar" class="d-flex flex-column flex-shrink-0">
             <div class="p-3 border-bottom border-secondary border-opacity-25 text-white d-flex align-items-center gap-3">
                 <div class="rounded-3 bg-primary p-2 text-white shadow-sm d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                     <i class="fa-solid fa-boxes-stacked fs-5"></i>
                 </div>
-                <div>
+                <div class="flex-grow-1">
                     <h6 class="mb-0 fw-bold tracking-tight">KHO HÀNG IMS</h6>
-                    <small class="text-secondary" style="font-size: 0.75rem;">Laravel 11 & RESTful API</small>
+                    <small class="text-secondary" style="font-size: 0.75rem;">Laravel 13 & RESTful API</small>
                 </div>
+                <button type="button" id="sidebarClose" class="btn btn-sm text-secondary d-lg-none p-1" aria-label="Đóng menu">
+                    <i class="fa-solid fa-xmark fs-5"></i>
+                </button>
             </div>
 
             <div class="py-3 flex-grow-1 overflow-y-auto">
@@ -154,11 +160,14 @@
         <!-- Main Content Area -->
         <div class="main-content">
             <!-- Topbar -->
-            <header class="topbar d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center gap-3">
+            <header class="topbar d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <div class="d-flex align-items-center gap-2 gap-md-3">
+                    <button type="button" id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-lg-none" aria-label="Mở menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
                     <h5 class="mb-0 fw-bold text-dark">@yield('page_title', 'Hệ Thống Quản Lý Kho')</h5>
                 </div>
-                <div class="d-flex align-items-center gap-3">
+                <div class="d-flex flex-wrap align-items-center gap-2 gap-md-3">
                     <a href="{{ route('docs.api') }}" class="btn btn-sm btn-outline-primary d-none d-md-inline-flex align-items-center gap-1">
                         <i class="fa-solid fa-code"></i> API Sanctum
                     </a>
@@ -172,7 +181,7 @@
             </header>
 
             <!-- Main Body -->
-            <main class="p-4 flex-grow-1">
+            <main class="p-3 p-md-4 flex-grow-1">
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 d-flex align-items-center gap-2 mb-4" role="alert">
                         <i class="fa-solid fa-circle-check fs-5"></i>
@@ -205,8 +214,8 @@
             </main>
 
             <!-- Footer -->
-            <footer class="bg-white border-top py-3 px-4 text-center text-muted small mt-auto">
-                <div class="d-flex flex-wrap justify-content-between align-items-center">
+            <footer class="bg-white border-top py-3 px-3 px-md-4 text-center text-md-start text-muted small mt-auto">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
                     <div>
                         <strong>Đồ án chuyên ngành CNTT:</strong> Xây dựng Hệ thống Quản lý Nhập - Xuất - Tồn kho ứng dụng Laravel Framework & RESTful API
                     </div>

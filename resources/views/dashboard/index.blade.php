@@ -113,7 +113,7 @@
     <!-- Cảnh báo tồn kho dưới min_stock -->
     <div class="col-lg-6">
         <div class="card card-custom h-100">
-            <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+            <div class="card-header bg-white border-bottom py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
                 <div>
                     <h6 class="fw-bold mb-0 text-danger">
                         <i class="fa-solid fa-triangle-exclamation me-1"></i> Danh Sách Cảnh Báo Tồn Kho Dưới Ngưỡng (min_stock)
@@ -171,7 +171,7 @@
     <!-- Biến động kho gần nhất (Audit Log) -->
     <div class="col-lg-6">
         <div class="card card-custom h-100">
-            <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+            <div class="card-header bg-white border-bottom py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
                 <div>
                     <h6 class="fw-bold mb-0 text-dark">
                         <i class="fa-solid fa-clock-rotate-left text-primary me-1"></i> Nhật Ký Biến Động Kho Gần Nhất

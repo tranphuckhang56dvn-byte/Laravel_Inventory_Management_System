@@ -7,7 +7,7 @@
 <div class="row g-4">
     <!-- Cột bên trái: Hướng dẫn nhanh xác thực Sanctum -->
     <div class="col-lg-4">
-        <div class="card card-custom p-4 sticky-top" style="top: 20px;">
+        <div class="card card-custom p-4 sticky-lg-top" style="top: 20px;">
             <div class="d-flex align-items-center gap-2 mb-3">
                 <div class="p-2 bg-primary bg-opacity-10 text-primary rounded-3">
                     <i class="fa-solid fa-key fs-5"></i>
@@ -136,7 +136,7 @@
                             <tr>
                                 <td><span class="badge bg-success">POST</span></td>
                                 <td><code>/api/products</code></td>
-                                <td>Tạo mới sản phẩm (yêu cầu sku, name, category_id, unit, purchase_price, selling_price, min_stock)</td>
+                                <td>Tạo mới sản phẩm (Admin; yêu cầu sku, name, category_id, unit, purchase_price, selling_price, min_stock)</td>
                             </tr>
                             <tr>
                                 <td><span class="badge bg-primary">GET</span></td>
@@ -146,7 +146,7 @@
                             <tr>
                                 <td><span class="badge bg-info text-dark">PUT</span></td>
                                 <td><code>/api/products/{id}</code></td>
-                                <td>Cập nhật thông tin sản phẩm</td>
+                                <td>Cập nhật thông tin sản phẩm (Admin)</td>
                             </tr>
                             <tr>
                                 <td><span class="badge bg-danger">DELETE</span></td>

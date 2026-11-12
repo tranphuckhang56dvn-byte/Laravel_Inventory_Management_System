@@ -67,14 +67,14 @@
                 Tài khoản Demo (Nhấp để tự động điền)
             </div>
             <div class="d-flex flex-column gap-2">
-                <div class="demo-pill d-flex justify-content-between align-items-center" onclick="fillAccount('admin@kho.vn', 'admin123')">
+                <div class="demo-pill d-flex flex-wrap justify-content-between align-items-center gap-1" onclick="fillAccount('admin@kho.vn', 'admin123')">
                     <div>
                         <span class="badge bg-danger me-1">Admin</span>
                         <strong class="small">Thái Anh Kiệt (Quản trị viên)</strong>
                     </div>
                     <small class="text-primary font-monospace">admin@kho.vn</small>
                 </div>
-                <div class="demo-pill d-flex justify-content-between align-items-center" onclick="fillAccount('staff@kho.vn', 'staff123')">
+                <div class="demo-pill d-flex flex-wrap justify-content-between align-items-center gap-1" onclick="fillAccount('staff@kho.vn', 'staff123')">
                     <div>
                         <span class="badge bg-primary me-1">Staff</span>
                         <strong class="small">Trần Phúc Khang (Thủ kho)</strong>

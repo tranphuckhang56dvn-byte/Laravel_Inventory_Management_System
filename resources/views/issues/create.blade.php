@@ -60,7 +60,7 @@
         <!-- Chi tiết sản phẩm xuất -->
         <div class="col-xl-9 col-lg-8">
             <div class="card card-custom">
-                <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                <div class="card-header bg-white border-bottom py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
                     <h6 class="fw-bold mb-0 text-dark">
                         <i class="fa-solid fa-boxes-stacked text-primary me-2"></i>Danh mục hàng hóa cần xuất kho
                     </h6>
@@ -69,18 +69,18 @@
                     </button>
                 </div>
 
-                <div class="px-4 py-2 bg-light border-bottom d-flex align-items-center justify-content-between text-muted small">
+                <div class="px-3 px-md-4 py-2 bg-light border-bottom d-flex flex-wrap align-items-center justify-content-between gap-2 text-muted small">
                     <div class="d-flex align-items-center">
                         <i class="fa-solid fa-circle-info text-primary me-2"></i>
                         <span>Hệ thống hiển thị <strong>tồn khả dụng</strong> và tự động tính <strong>số lượng còn lại sau xuất</strong> theo thời gian thực.</span>
                     </div>
-                    <span class="badge bg-success-subtle text-success border border-success-subtle small ms-2 text-nowrap">
+                    <span class="badge bg-success-subtle text-success border border-success-subtle small text-nowrap">
                         <i class="fa-solid fa-shield-halved me-1"></i>Chống âm kho
                     </span>
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table table-custom mb-0" id="itemsTable">
+                    <table class="table table-custom table-items-mobile mb-0" id="itemsTable">
                         <thead>
                             <tr class="table-light text-secondary small fw-bold text-uppercase border-bottom">
                                 <th style="width: 33%;" class="ps-3 text-nowrap">Sản phẩm xuất (*)</th>
@@ -104,7 +104,7 @@
                     </table>
                 </div>
 
-                <div class="card-footer bg-white p-3 border-top d-flex justify-content-between align-items-center">
+                <div class="card-footer bg-white p-3 border-top d-flex flex-wrap justify-content-between align-items-center gap-2">
                     <a href="{{ route('issues.index') }}" class="btn btn-light border">Hủy bỏ</a>
                     <button type="submit" class="btn btn-primary px-4">
                         <i class="fa-solid fa-arrow-up-from-bracket me-1"></i> Xác nhận xuất kho & Trừ tồn

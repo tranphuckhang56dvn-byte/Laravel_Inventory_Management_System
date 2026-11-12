@@ -76,8 +76,8 @@ Laravel Sanctum cung cấp hệ thống xác thực gọn nhẹ nhưng bảo m�
 
 ### 2.4. Phân quyền theo vai trò (RBAC - Role-Based Access Control)
 Hệ thống sử dụng Middleware `CheckRole` để kiểm tra quyền hạn của người dùng:
-* **Admin (Quản trị viên):** Có toàn quyền đối với hệ thống, quản lý người dùng, phân quyền, thêm/sửa/xóa sản phẩm, nhà cung cấp, danh mục và thực hiện nghiệp vụ kiểm kê/điều chỉnh tồn kho.
-* **Staff (Thủ kho):** Có quyền lập phiếu nhập kho, phiếu xuất kho, tra cứu tồn kho, xem danh sách sản phẩm và nhật ký biến động kho; không thể truy cập vào các trang cấu hình nhân sự hay xóa dữ liệu.
+* **Admin (Quản trị viên):** Có toàn quyền đối với hệ thống, quản lý người dùng, phân quyền, thêm/sửa/xóa sản phẩm, nhà cung cấp, danh mục và thực hiện các nghiệp vụ kho (nhập, xuất, kiểm kê/điều chỉnh tồn kho).
+* **Staff (Thủ kho):** Có quyền lập phiếu nhập kho, phiếu xuất kho, kiểm kê/điều chỉnh tồn kho, tra cứu tồn kho, xem danh sách sản phẩm và nhật ký biến động kho; không thể truy cập vào các trang quản lý người dùng hay thêm/sửa/xóa dữ liệu danh mục (sản phẩm, danh mục, nhà cung cấp).
 
 ### 2.5. Trực quan hóa dữ liệu bằng Chart.js
 Sử dụng thư viện **Chart.js** để hiển thị các biểu đồ tương tác:
@@ -99,6 +99,7 @@ Sử dụng thư viện **Chart.js** để hiển thị các biểu đồ tươn
 |          |--- Đăng nhập hệ thống (Web & API Token)                           |
 |          |--- Xem Dashboard & Cảnh báo tồn kho thấp (min_stock)               |
 |          |--- Tra cứu danh mục, nhà cung cấp, sản phẩm                        |
+|          |--- Kiểm kê & Điều chỉnh tồn kho thực tế (Stock Adjustment)         |
 |          |--- Lập phiếu nhập kho (Dynamic items, tự động tính tổng tiền)      |
 |          |--- Lập phiếu xuất kho (Kiểm tra tồn an toàn, tự động trừ tồn)      |
 |          |--- In phiếu nhập / phiếu xuất khổ A4 chuẩn                         |
@@ -106,7 +107,6 @@ Sử dụng thư viện **Chart.js** để hiển thị các biểu đồ tươn
 |                                                                               |
 |   [Quản Trị Viên / Admin] (Kế thừa toàn bộ quyền của Staff và mở rộng thêm)   |
 |          |--- Thêm, Sửa, Xóa Sản phẩm, Danh mục, Nhà cung cấp                |
-|          |--- Kiểm kê & Điều chỉnh tồn kho thực tế (Stock Adjustment)         |
 |          |--- Quản lý danh sách tài khoản người dùng                          |
 |          |--- Khóa / Mở khóa tài khoản & Phân vai trò Admin/Staff             |
 +-------------------------------------------------------------------------------+
@@ -202,12 +202,11 @@ Cơ sở dữ liệu bao gồm 8 bảng chính được chuẩn hóa mức 3NF:
 ## CHƯƠNG 4: HIỆN THỰC HỆ THỐNG & KẾT QUẢ ĐẠT ĐƯỢC
 
 ### 4.1. Môi trường triển khai & Kiến trúc thư mục mã nguồn
-* **Môi trường Web Server:** XAMPP (`C:\xampp`) tích hợp Apache và PHP 8.3 (đã nạp extension `php_mongodb`).
-* **Cơ sở dữ liệu chính:** **MongoDB** (Port 27017, Database: `laravel_inventory_management_system`, Driver: `mongodb/laravel-mongodb` v5.12).
-* **Cơ sở dữ liệu dự phòng:** MySQL / MariaDB (Port 3306) trên XAMPP.
+* **Môi trường Web Server:** XAMPP (`C:\xampp`) tích hợp Apache và PHP 8.3.
+* **Cơ sở dữ liệu chính:** **MySQL / MariaDB** (Port 3306, Database: `laravel_inventory_management_system`, quản trị qua phpMyAdmin; hỗ trợ triển khai MySQL-compatible Cloud như TiDB Cloud).
 * **Thư mục Web Root:** Đã cấu hình Directory Junction liên kết trực tiếp vào `C:\xampp\htdocs\Laravel_Inventory_Management_System`.
 
-Hệ thống được tổ chức chuyên nghiệp, tuân thủ nghiêm ngặt quy ước chuẩn của Laravel 11/12 và PSR-12:
+Hệ thống được tổ chức chuyên nghiệp, tuân thủ nghiêm ngặt quy ước chuẩn của Laravel 13 và PSR-12:
 
 ```
 E:\Laravel_Inventory_Management_System\
@@ -240,7 +239,7 @@ E:\Laravel_Inventory_Management_System\
 │   ├── api.php              # 28 RESTful Endpoints
 │   └── web.php              # Các routes điều hướng giao diện Web
 ├── tests\Feature\
-│   └── InventorySystemTest.php # Bộ kiểm thử tự động 11 Tests đạt 100%
+│   └── InventorySystemTest.php # Bộ kiểm thử tự động (12 Feature Tests; toàn bộ dự án 14/14 Tests đạt 100%)
 ├── postman_collection.json  # File kiểm thử Postman tích hợp sẵn
 └── README.md                # Tài liệu hướng dẫn cài đặt & vận hành
 ```
@@ -334,7 +333,10 @@ php artisan test
 * `test_staff_cannot_access_user_management` -> PASSED (Kiểm chứng phân quyền RBAC)
 * `test_admin_can_access_user_management` -> PASSED
 * `test_admin_can_adjust_stock` -> PASSED
-* **Tổng kết: 11/11 Tests Passed, 41 Assertions (100% đạt yêu cầu).**
+* `test_staff_cannot_create_or_modify_master_data` -> PASSED
+* `test_admin_has_full_master_data_access` -> PASSED
+* `test_staff_can_adjust_stock` -> PASSED
+* **Tổng kết: 14/14 Tests Passed, 54 Assertions (100% đạt yêu cầu, gồm 12 test trong `InventorySystemTest.php` và 2 test mặc định trong `ExampleTest.php`).**
 
 ---
 
@@ -355,7 +357,7 @@ php artisan test
 ---
 
 ## TÀI LIỆU THAM KHẢO
-1. Laravel Documentation (v11.x & v12.x): https://laravel.com/docs
+1. Laravel Documentation (v13.x): https://laravel.com/docs
 2. Laravel Sanctum Authentication Guide: https://laravel.com/docs/sanctum
 3. Database Concurrency Control & Pessimistic Locking in RDBMS (MySQL / PostgreSQL / SQLite).
 4. Chart.js Interactive Charting Library Documentation: https://www.chartjs.org/docs/

@@ -15,7 +15,7 @@
 </div>
 
 <div class="card card-custom">
-    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+    <div class="card-header bg-white border-bottom py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
         <div>
             <h6 class="fw-bold mb-0 text-danger">
                 <i class="fa-solid fa-bell me-2"></i>Có {{ $products->total() }} mặt hàng đang bị thiếu hụt

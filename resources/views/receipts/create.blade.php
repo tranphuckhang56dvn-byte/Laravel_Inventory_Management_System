@@ -58,7 +58,7 @@
         <!-- Danh sách mặt hàng nhập -->
         <div class="col-lg-8">
             <div class="card card-custom">
-                <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                <div class="card-header bg-white border-bottom py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
                     <h6 class="fw-bold mb-0 text-dark">
                         <i class="fa-solid fa-boxes-stacked text-primary me-2"></i>Chi tiết các mặt hàng nhập kho
                     </h6>
@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table table-custom align-middle mb-0" id="itemsTable">
+                    <table class="table table-custom table-items-mobile align-middle mb-0" id="itemsTable">
                         <thead>
                             <tr>
                                 <th style="width: 40%;">Sản phẩm (*)</th>
@@ -91,7 +91,7 @@
                     </table>
                 </div>
 
-                <div class="card-footer bg-white p-3 border-top d-flex justify-content-between align-items-center">
+                <div class="card-footer bg-white p-3 border-top d-flex flex-wrap justify-content-between align-items-center gap-2">
                     <a href="{{ route('receipts.index') }}" class="btn btn-light border">Hủy thao tác</a>
                     <button type="submit" class="btn btn-primary px-4">
                         <i class="fa-solid fa-circle-check me-1"></i> Hoàn tất nhập kho & Lưu tồn

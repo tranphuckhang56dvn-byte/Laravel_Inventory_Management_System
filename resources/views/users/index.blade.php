@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="card card-custom mb-4">
-    <div class="card-body p-3 d-flex justify-content-between align-items-center">
+    <div class="card-body p-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
         <div>
             <h6 class="fw-bold mb-1 text-dark"><i class="fa-solid fa-users-gear text-primary me-2"></i>Danh Sách Tài Khoản Hệ Thống</h6>
             <small class="text-muted">Quản trị viên (Admin) và Nhân viên thủ kho (Warehouse Staff)</small>
@@ -81,53 +81,6 @@
                                     </button>
                                 </form>
                             @endif
-
-                            <!-- Modal Sửa Người Dùng -->
-                            <div class="modal fade" id="editUser{{ $u->id }}" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered text-start">
-                                    <form method="POST" action="{{ route('users.update', $u) }}" class="modal-content">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="modal-header">
-                                            <h6 class="modal-title fw-bold">Chỉnh sửa tài khoản: {{ $u->name }}</h6>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label class="form-label small fw-semibold">Họ và tên (*)</label>
-                                                <input type="text" name="name" class="form-control" value="{{ $u->name }}" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label small fw-semibold">Email (*)</label>
-                                                <input type="email" name="email" class="form-control" value="{{ $u->email }}" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label small fw-semibold">Số điện thoại</label>
-                                                <input type="text" name="phone" class="form-control" value="{{ $u->phone }}">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label small fw-semibold">Vai trò phân quyền (*)</label>
-                                                <select name="role" class="form-select" required>
-                                                    <option value="staff" {{ $u->role === 'staff' ? 'selected' : '' }}>Thủ kho / Nhân viên kho (Staff)</option>
-                                                    <option value="admin" {{ $u->role === 'admin' ? 'selected' : '' }}>Quản trị viên toàn quyền (Admin)</option>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label small fw-semibold">Mật khẩu mới (Bỏ trống nếu không đổi)</label>
-                                                <input type="password" name="password" class="form-control" placeholder="••••••••">
-                                            </div>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" name="status" id="uStatus{{ $u->id }}" value="1" {{ $u->status ? 'checked' : '' }}>
-                                                <label class="form-check-label small fw-semibold" for="uStatus{{ $u->id }}">Cho phép đăng nhập (Active)</label>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                            <button type="submit" class="btn btn-sm btn-primary">Lưu thay đổi</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -135,6 +88,55 @@
         </table>
     </div>
 </div>
+
+@foreach($users as $u)
+    <!-- Modal Sửa Người Dùng -->
+    <div class="modal fade" id="editUser{{ $u->id }}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered text-start">
+            <form method="POST" action="{{ route('users.update', $u) }}" class="modal-content">
+                @csrf
+                @method('PUT')
+                <div class="modal-header">
+                    <h6 class="modal-title fw-bold">Chỉnh sửa tài khoản: {{ $u->name }}</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Họ và tên (*)</label>
+                        <input type="text" name="name" class="form-control" value="{{ $u->name }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Email (*)</label>
+                        <input type="email" name="email" class="form-control" value="{{ $u->email }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Số điện thoại</label>
+                        <input type="text" name="phone" class="form-control" value="{{ $u->phone }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Vai trò phân quyền (*)</label>
+                        <select name="role" class="form-select" required>
+                            <option value="staff" {{ $u->role === 'staff' ? 'selected' : '' }}>Thủ kho / Nhân viên kho (Staff)</option>
+                            <option value="admin" {{ $u->role === 'admin' ? 'selected' : '' }}>Quản trị viên toàn quyền (Admin)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Mật khẩu mới (Bỏ trống nếu không đổi)</label>
+                        <input type="password" name="password" class="form-control" placeholder="••••••••">
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="status" id="uStatus{{ $u->id }}" value="1" {{ $u->status ? 'checked' : '' }}>
+                        <label class="form-check-label small fw-semibold" for="uStatus{{ $u->id }}">Cho phép đăng nhập (Active)</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-sm btn-primary">Lưu thay đổi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+@endforeach
 
 <!-- Modal Thêm Người Dùng Mới -->
 <div class="modal fade" id="createUserModal" tabindex="-1">

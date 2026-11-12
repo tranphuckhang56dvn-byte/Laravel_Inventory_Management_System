@@ -93,42 +93,6 @@
                                             </button>
                                         </form>
                                     @endif
-
-                                    <!-- Modal Sửa Danh mục -->
-                                    <div class="modal fade" id="editCat{{ $category->id }}" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-centered text-start">
-                                            <form method="POST" action="{{ route('categories.update', $category) }}" class="modal-content">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="modal-header">
-                                                    <h6 class="modal-title fw-bold">Chỉnh sửa danh mục</h6>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label class="form-label small fw-semibold">Mã danh mục (*)</label>
-                                                        <input type="text" name="code" class="form-control" value="{{ $category->code }}" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label small fw-semibold">Tên danh mục (*)</label>
-                                                        <input type="text" name="name" class="form-control" value="{{ $category->name }}" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label small fw-semibold">Mô tả</label>
-                                                        <textarea name="description" class="form-control" rows="3">{{ $category->description }}</textarea>
-                                                    </div>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox" name="status" id="editCatStatus{{ $category->id }}" value="1" {{ $category->status ? 'checked' : '' }}>
-                                                        <label class="form-check-label small fw-semibold" for="editCatStatus{{ $category->id }}">Hoạt động</label>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                    <button type="submit" class="btn btn-sm btn-primary">Lưu thay đổi</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
                                 </td>
                             </tr>
                         @empty
@@ -147,4 +111,44 @@
         </div>
     </div>
 </div>
+
+@if(auth()->user()->isAdmin())
+    @foreach($categories as $category)
+        <!-- Modal Sửa Danh mục -->
+        <div class="modal fade" id="editCat{{ $category->id }}" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered text-start">
+                <form method="POST" action="{{ route('categories.update', $category) }}" class="modal-content">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-header">
+                        <h6 class="modal-title fw-bold">Chỉnh sửa danh mục</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Mã danh mục (*)</label>
+                            <input type="text" name="code" class="form-control" value="{{ $category->code }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Tên danh mục (*)</label>
+                            <input type="text" name="name" class="form-control" value="{{ $category->name }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Mô tả</label>
+                            <textarea name="description" class="form-control" rows="3">{{ $category->description }}</textarea>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="status" id="editCatStatus{{ $category->id }}" value="1" {{ $category->status ? 'checked' : '' }}>
+                            <label class="form-check-label small fw-semibold" for="editCatStatus{{ $category->id }}">Hoạt động</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-sm btn-primary">Lưu thay đổi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endforeach
+@endif
 @endsection

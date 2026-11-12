@@ -46,13 +46,13 @@
 </div>
 
 <div class="card card-custom">
-    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+    <div class="card-header bg-white border-bottom py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
         <div>
             <h6 class="fw-bold mb-0 text-dark">
                 <i class="fa-solid fa-boxes-stacked text-primary me-2"></i>Tổng số: {{ $products->total() }} sản phẩm
             </h6>
         </div>
-        <div class="d-flex gap-2">
+        <div class="d-flex flex-wrap gap-2">
             <a href="{{ route('products.low-stock') }}" class="btn btn-sm btn-outline-warning">
                 <i class="fa-solid fa-triangle-exclamation me-1"></i> Xem cảnh báo
             </a>
@@ -121,7 +121,7 @@
                         </td>
                         <td class="text-end">
                             <div class="dropdown">
-                                <button class="btn btn-sm btn-light border dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <button class="btn btn-sm btn-light border dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}'>
                                     Thao tác
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
@@ -154,43 +154,6 @@
                                     @endif
                                 </ul>
                             </div>
-
-                            <!-- Modal Điều chỉnh kho -->
-                            <div class="modal fade" id="adjustModal{{ $product->id }}" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered text-start">
-                                    <form method="POST" action="{{ route('products.adjust-stock', $product) }}" class="modal-content">
-                                        @csrf
-                                        <div class="modal-header">
-                                            <h6 class="modal-title fw-bold">
-                                                <i class="fa-solid fa-sliders text-warning me-1"></i> Kiểm kê & Điều chỉnh tồn kho
-                                            </h6>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p class="small text-muted mb-3">Sản phẩm: <strong>{{ $product->name }}</strong> (SKU: {{ $product->sku }})</p>
-                                            <div class="mb-3">
-                                                <label class="form-label small fw-semibold">Tồn kho thực tế hiện tại</label>
-                                                <input type="text" class="form-control" value="{{ $product->current_stock }} {{ $product->unit }}" disabled>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label small fw-semibold">Số lượng kiểm kê mới (*)</label>
-                                                <input type="number" name="new_stock" class="form-control" min="0" value="{{ $product->current_stock }}" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label small fw-semibold">Lý do điều chỉnh (*)</label>
-                                                <textarea name="reason" class="form-control" rows="2" placeholder="Ví dụ: Kiểm kê định kỳ cuối tháng, sai lệch thực tế..." required></textarea>
-                                            </div>
-                                            <div class="alert alert-info py-2 small mb-0">
-                                                <i class="fa-solid fa-shield-halved me-1"></i> Nghiệp vụ sử dụng Pessimistic Locking và ghi log kiểm toán.
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                            <button type="submit" class="btn btn-sm btn-warning">Xác nhận cập nhật</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                         </td>
                     </tr>
                 @empty
@@ -210,4 +173,43 @@
         </div>
     @endif
 </div>
+
+@foreach($products as $product)
+    <!-- Modal Điều chỉnh kho -->
+    <div class="modal fade" id="adjustModal{{ $product->id }}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered text-start">
+            <form method="POST" action="{{ route('products.adjust-stock', $product) }}" class="modal-content">
+                @csrf
+                <div class="modal-header">
+                    <h6 class="modal-title fw-bold">
+                        <i class="fa-solid fa-sliders text-warning me-1"></i> Kiểm kê & Điều chỉnh tồn kho
+                    </h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="small text-muted mb-3">Sản phẩm: <strong>{{ $product->name }}</strong> (SKU: {{ $product->sku }})</p>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Tồn kho thực tế hiện tại</label>
+                        <input type="text" class="form-control" value="{{ $product->current_stock }} {{ $product->unit }}" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Số lượng kiểm kê mới (*)</label>
+                        <input type="number" name="new_stock" class="form-control" min="0" value="{{ $product->current_stock }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Lý do điều chỉnh (*)</label>
+                        <textarea name="reason" class="form-control" rows="2" placeholder="Ví dụ: Kiểm kê định kỳ cuối tháng, sai lệch thực tế..." required></textarea>
+                    </div>
+                    <div class="alert alert-info py-2 small mb-0">
+                        <i class="fa-solid fa-shield-halved me-1"></i> Nghiệp vụ sử dụng Pessimistic Locking và ghi log kiểm toán.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-sm btn-warning">Xác nhận cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+@endforeach
 @endsection

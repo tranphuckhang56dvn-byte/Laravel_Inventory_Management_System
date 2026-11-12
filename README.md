@@ -88,7 +88,7 @@ Chạy lệnh kiểm thử:
 $env:Path = "C:\xampp\php;C:\Program Files\Git\cmd;" + $env:Path
 php artisan test
 ```
-*Kết quả: **11/11 Tests Passed**, **41 Assertions Passed** (100% đạt chuẩn).*
+*Kết quả: **14/14 Tests Passed**, **54 Assertions Passed** (100% đạt chuẩn).*
 
 ---
 
@@ -102,8 +102,8 @@ php artisan test
 | `GET` | `/api/dashboard/stats` | Sanctum | Lấy số liệu thống kê & biểu đồ Dashboard |
 | `GET` | `/api/products` | Sanctum | Danh sách sản phẩm (hỗ trợ lọc từ khóa, danh mục) |
 | `GET` | `/api/products/low-stock` | Sanctum | Danh sách sản phẩm dưới ngưỡng an toàn `min_stock` |
-| `POST` | `/api/products` | Sanctum | Thêm sản phẩm mới |
-| `POST` | `/api/products/{id}/adjust-stock` | Admin | Kiểm kê / điều chỉnh tồn kho (Pessimistic Lock) |
+| `POST` | `/api/products` | Admin | Thêm sản phẩm mới |
+| `POST` | `/api/products/{id}/adjust-stock` | Admin & Staff | Kiểm kê / điều chỉnh tồn kho (Pessimistic Lock) |
 | `GET` | `/api/goods-receipts` | Sanctum | Danh sách phiếu nhập kho |
 | `POST` | `/api/goods-receipts` | Sanctum | **Lập phiếu nhập (Transaction + Pessimistic Lock)** |
 | `GET` | `/api/goods-issues` | Sanctum | Danh sách phiếu xuất kho |
