@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Hệ Thống Quản Lý Kho') - WMS Laravel</title>
+    <title>@yield('title', 'Hệ Thống Quản Lý Kho') - IMS Laravel</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome 6 Icons -->
@@ -15,132 +15,28 @@
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <style>
-        :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --sidebar-bg: #0f172a;
-            --sidebar-hover: #1e293b;
-            --sidebar-text: #94a3b8;
-            --sidebar-active: #38bdf8;
-            --body-bg: #f8fafc;
-        }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--body-bg);
-            color: #1e293b;
-            min-height: 100vh;
-        }
-        #sidebar {
-            width: 260px;
-            background-color: var(--sidebar-bg);
-            min-height: 100vh;
-            transition: all 0.3s;
-            z-index: 1000;
-        }
-        #sidebar .nav-link {
-            color: var(--sidebar-text);
-            font-size: 0.92rem;
-            font-weight: 500;
-            padding: 11px 18px;
-            border-radius: 8px;
-            margin: 3px 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.2s ease;
-        }
-        #sidebar .nav-link:hover {
-            color: #ffffff;
-            background-color: var(--sidebar-hover);
-        }
-        #sidebar .nav-link.active {
-            color: #ffffff;
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
-        }
-        .main-content {
-            flex: 1;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .topbar {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 12px 28px;
-        }
-        .card-custom {
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-            background-color: #ffffff;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .card-stat {
-            border-radius: 14px;
-            border: none;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-        }
-        .table-custom th {
-            background-color: #f8fafc;
-            color: #475569;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 12px 16px;
-        }
-        .table-custom td {
-            padding: 14px 16px;
-            vertical-align: middle;
-            border-bottom: 1px solid #f1f5f9;
-        }
-        .badge-subtle-success { background-color: #dcfce7; color: #166534; font-weight: 600; }
-        .badge-subtle-warning { background-color: #fef9c3; color: #854d0e; font-weight: 600; }
-        .badge-subtle-danger  { background-color: #fee2e2; color: #991b1b; font-weight: 600; }
-        .badge-subtle-primary { background-color: #dbeafe; color: #1e40af; font-weight: 600; }
-        .badge-subtle-info    { background-color: #e0f2fe; color: #0369a1; font-weight: 600; }
-        .badge-subtle-dark    { background-color: #f1f5f9; color: #334155; font-weight: 600; }
-        .btn-primary {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            border: none;
-            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
-        }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-        }
-        @media print {
-            #sidebar, .topbar, .btn, .no-print {
-                display: none !important;
-            }
-            .main-content {
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            .card-custom {
-                border: none !important;
-                box-shadow: none !important;
-            }
-        }
-    </style>
+    <!-- App Custom CSS -->
+    <link href="{{ asset('css/app-custom.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
 <body>
-    <div class="d-flex">
+    <div class="d-flex app-shell">
+        <!-- Mobile Sidebar Backdrop -->
+        <div id="sidebarBackdrop" class="sidebar-backdrop d-lg-none"></div>
+
         <!-- Sidebar Navigation -->
         <aside id="sidebar" class="d-flex flex-column flex-shrink-0">
             <div class="p-3 border-bottom border-secondary border-opacity-25 text-white d-flex align-items-center gap-3">
                 <div class="rounded-3 bg-primary p-2 text-white shadow-sm d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                     <i class="fa-solid fa-boxes-stacked fs-5"></i>
                 </div>
-                <div>
-                    <h6 class="mb-0 fw-bold tracking-tight">KHO VẬN WMS</h6>
-                    <small class="text-secondary" style="font-size: 0.75rem;">Laravel 11 & RESTful API</small>
+                <div class="flex-grow-1">
+                    <h6 class="mb-0 fw-bold tracking-tight">KHO HÀNG IMS</h6>
+                    <small class="text-secondary" style="font-size: 0.75rem;">Laravel 13 & RESTful API</small>
                 </div>
+                <button type="button" id="sidebarClose" class="btn btn-sm text-secondary d-lg-none p-1" aria-label="Đóng menu">
+                    <i class="fa-solid fa-xmark fs-5"></i>
+                </button>
             </div>
 
             <div class="py-3 flex-grow-1 overflow-y-auto">
@@ -264,11 +160,14 @@
         <!-- Main Content Area -->
         <div class="main-content">
             <!-- Topbar -->
-            <header class="topbar d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center gap-3">
+            <header class="topbar d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <div class="d-flex align-items-center gap-2 gap-md-3">
+                    <button type="button" id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-lg-none" aria-label="Mở menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
                     <h5 class="mb-0 fw-bold text-dark">@yield('page_title', 'Hệ Thống Quản Lý Kho')</h5>
                 </div>
-                <div class="d-flex align-items-center gap-3">
+                <div class="d-flex flex-wrap align-items-center gap-2 gap-md-3">
                     <a href="{{ route('docs.api') }}" class="btn btn-sm btn-outline-primary d-none d-md-inline-flex align-items-center gap-1">
                         <i class="fa-solid fa-code"></i> API Sanctum
                     </a>
@@ -282,7 +181,7 @@
             </header>
 
             <!-- Main Body -->
-            <main class="p-4 flex-grow-1">
+            <main class="p-3 p-md-4 flex-grow-1">
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 d-flex align-items-center gap-2 mb-4" role="alert">
                         <i class="fa-solid fa-circle-check fs-5"></i>
@@ -315,8 +214,8 @@
             </main>
 
             <!-- Footer -->
-            <footer class="bg-white border-top py-3 px-4 text-center text-muted small mt-auto">
-                <div class="d-flex flex-wrap justify-content-between align-items-center">
+            <footer class="bg-white border-top py-3 px-3 px-md-4 text-center text-md-start text-muted small mt-auto">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
                     <div>
                         <strong>Đồ án chuyên ngành CNTT:</strong> Xây dựng Hệ thống Quản lý Nhập - Xuất - Tồn kho ứng dụng Laravel Framework & RESTful API
                     </div>
@@ -330,25 +229,8 @@
 
     <!-- Bootstrap 5 Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Xác nhận xóa với SweetAlert2
-        function confirmDelete(formId, message = 'Bạn có chắc chắn muốn xóa bản ghi này không?') {
-            Swal.fire({
-                title: 'Xác nhận xóa?',
-                text: message,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#ef4444',
-                cancelButtonColor: '#64748b',
-                confirmButtonText: 'Đồng ý xóa',
-                cancelButtonText: 'Hủy bỏ'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(formId).submit();
-                }
-            });
-        }
-    </script>
+    <!-- App Custom JS -->
+    <script src="{{ asset('js/app-custom.js') }}"></script>
     @yield('scripts')
 </body>
 </html>

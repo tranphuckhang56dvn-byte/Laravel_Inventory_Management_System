@@ -52,7 +52,7 @@
 </div>
 
 <div class="card card-custom">
-    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+    <div class="card-header bg-white border-bottom py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
         <div>
             <h6 class="fw-bold mb-0 text-dark">
                 <i class="fa-solid fa-clock-rotate-left text-primary me-2"></i>Tổng số {{ $logs->total() }} bản ghi kiểm toán tồn kho

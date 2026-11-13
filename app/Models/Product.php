@@ -66,7 +66,7 @@ class Product extends Model
 
     public function isLowStock(): bool
     {
-        return $this->current_stock <= $this->min_stock;
+        return $this->current_stock < $this->min_stock;
     }
 
     public function scopeActive(Builder $query): Builder
@@ -76,6 +76,6 @@ class Product extends Model
 
     public function scopeLowStock(Builder $query): Builder
     {
-        return $query->whereColumn('current_stock', '<=', 'min_stock');
+        return $query->whereColumn('current_stock', '<', 'min_stock');
     }
 }

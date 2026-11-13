@@ -48,7 +48,7 @@ class GoodsIssueController extends Controller
 
     public function create(): View
     {
-        $products = Product::where('status', true)->where('current_stock', '>', 0)->orderBy('name')->get();
+        $products = Product::where('status', true)->orderBy('name')->get();
         $suggestedCode = $this->inventoryService->generateIssueCode();
 
         return view('issues.create', compact('products', 'suggestedCode'));

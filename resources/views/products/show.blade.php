@@ -41,9 +41,11 @@
             @endif
 
             <div class="d-flex gap-2">
-                <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-outline-primary flex-grow-1">
-                    <i class="fa-solid fa-pen-to-square me-1"></i> Sửa thông tin
-                </a>
+                @if(auth()->user()->isAdmin())
+                    <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-outline-primary flex-grow-1">
+                        <i class="fa-solid fa-pen-to-square me-1"></i> Sửa thông tin
+                    </a>
+                @endif
                 <a href="{{ route('receipts.create') }}" class="btn btn-sm btn-success flex-grow-1">
                     <i class="fa-solid fa-cart-plus me-1"></i> Nhập thêm
                 </a>

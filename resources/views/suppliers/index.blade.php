@@ -14,9 +14,11 @@
                     <a href="{{ route('suppliers.index') }}" class="btn btn-outline-secondary"><i class="fa-solid fa-rotate-left"></i></a>
                 @endif
             </form>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createSupplierModal">
-                <i class="fa-solid fa-plus me-1"></i> Thêm Nhà Cung Cấp Mới
-            </button>
+            @if(auth()->user()->isAdmin())
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createSupplierModal">
+                    <i class="fa-solid fa-plus me-1"></i> Thêm Nhà Cung Cấp Mới
+                </button>
+            @endif
         </div>
     </div>
 </div>
@@ -55,10 +57,10 @@
                             </span>
                         </td>
                         <td class="text-end">
-                            <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal" data-bs-target="#editSup{{ $sup->id }}" title="Chỉnh sửa">
-                                <i class="fa-solid fa-pen"></i>
-                            </button>
                             @if(auth()->user()->isAdmin())
+                                <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal" data-bs-target="#editSup{{ $sup->id }}" title="Chỉnh sửa">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
                                 <form id="del-sup-{{ $sup->id }}" method="POST" action="{{ route('suppliers.destroy', $sup) }}" class="d-inline-block m-0">
                                     @csrf
                                     @method('DELETE')
@@ -67,52 +69,6 @@
                                     </button>
                                 </form>
                             @endif
-
-                            <!-- Modal Sửa Nhà Cung Cấp -->
-                            <div class="modal fade" id="editSup{{ $sup->id }}" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered text-start">
-                                    <form method="POST" action="{{ route('suppliers.update', $sup) }}" class="modal-content">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="modal-header">
-                                            <h6 class="modal-title fw-bold">Chỉnh sửa nhà cung cấp</h6>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label class="form-label small fw-semibold">Mã nhà cung cấp (*)</label>
-                                                <input type="text" name="code" class="form-control" value="{{ $sup->code }}" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label small fw-semibold">Tên công ty / nhà cung cấp (*)</label>
-                                                <input type="text" name="name" class="form-control" value="{{ $sup->name }}" required>
-                                            </div>
-                                            <div class="row g-2 mb-3">
-                                                <div class="col-6">
-                                                    <label class="form-label small fw-semibold">Số điện thoại</label>
-                                                    <input type="text" name="phone" class="form-control" value="{{ $sup->phone }}">
-                                                </div>
-                                                <div class="col-6">
-                                                    <label class="form-label small fw-semibold">Email</label>
-                                                    <input type="email" name="email" class="form-control" value="{{ $sup->email }}">
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label small fw-semibold">Địa chỉ trụ sở / kho</label>
-                                                <textarea name="address" class="form-control" rows="2">{{ $sup->address }}</textarea>
-                                            </div>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" name="status" id="supStatus{{ $sup->id }}" value="1" {{ $sup->status ? 'checked' : '' }}>
-                                                <label class="form-check-label small fw-semibold" for="supStatus{{ $sup->id }}">Hợp tác kinh doanh</label>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                            <button type="submit" class="btn btn-sm btn-primary">Lưu thay đổi</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                         </td>
                     </tr>
                 @empty
@@ -129,6 +85,56 @@
         </div>
     @endif
 </div>
+
+@if(auth()->user()->isAdmin())
+    @foreach($suppliers as $sup)
+        <!-- Modal Sửa Nhà Cung Cấp -->
+        <div class="modal fade" id="editSup{{ $sup->id }}" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered text-start">
+                <form method="POST" action="{{ route('suppliers.update', $sup) }}" class="modal-content">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-header">
+                        <h6 class="modal-title fw-bold">Chỉnh sửa nhà cung cấp</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Mã nhà cung cấp (*)</label>
+                            <input type="text" name="code" class="form-control" value="{{ $sup->code }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Tên công ty / nhà cung cấp (*)</label>
+                            <input type="text" name="name" class="form-control" value="{{ $sup->name }}" required>
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-12 col-sm-6">
+                                <label class="form-label small fw-semibold">Số điện thoại</label>
+                                <input type="text" name="phone" class="form-control" value="{{ $sup->phone }}">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <label class="form-label small fw-semibold">Email</label>
+                                <input type="email" name="email" class="form-control" value="{{ $sup->email }}">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Địa chỉ trụ sở / kho</label>
+                            <textarea name="address" class="form-control" rows="2">{{ $sup->address }}</textarea>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="status" id="supStatus{{ $sup->id }}" value="1" {{ $sup->status ? 'checked' : '' }}>
+                            <label class="form-check-label small fw-semibold" for="supStatus{{ $sup->id }}">Hợp tác kinh doanh</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-sm btn-primary">Lưu thay đổi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endforeach
+@endif
 
 <!-- Modal Thêm Nhà Cung Cấp Mới -->
 <div class="modal fade" id="createSupplierModal" tabindex="-1">
@@ -149,11 +155,11 @@
                     <input type="text" name="name" class="form-control" placeholder="Tên công ty hoặc doanh nghiệp..." required>
                 </div>
                 <div class="row g-2 mb-3">
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6">
                         <label class="form-label small fw-semibold">Số điện thoại</label>
                         <input type="text" name="phone" class="form-control" placeholder="028...">
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6">
                         <label class="form-label small fw-semibold">Email liên hệ</label>
                         <input type="email" name="email" class="form-control" placeholder="contact@supplier.vn">
                     </div>

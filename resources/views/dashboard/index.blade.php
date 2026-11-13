@@ -113,7 +113,7 @@
     <!-- Cảnh báo tồn kho dưới min_stock -->
     <div class="col-lg-6">
         <div class="card card-custom h-100">
-            <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+            <div class="card-header bg-white border-bottom py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
                 <div>
                     <h6 class="fw-bold mb-0 text-danger">
                         <i class="fa-solid fa-triangle-exclamation me-1"></i> Danh Sách Cảnh Báo Tồn Kho Dưới Ngưỡng (min_stock)
@@ -171,7 +171,7 @@
     <!-- Biến động kho gần nhất (Audit Log) -->
     <div class="col-lg-6">
         <div class="card card-custom h-100">
-            <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+            <div class="card-header bg-white border-bottom py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
                 <div>
                     <h6 class="fw-bold mb-0 text-dark">
                         <i class="fa-solid fa-clock-rotate-left text-primary me-1"></i> Nhật Ký Biến Động Kho Gần Nhất
@@ -237,78 +237,16 @@
 
 @section('scripts')
 <script>
-    // 1. Monthly Flow Chart (Chart.js)
-    const ctxFlow = document.getElementById('monthlyFlowChart').getContext('2d');
-    new Chart(ctxFlow, {
-        type: 'bar',
-        data: {
-            labels: {!! json_encode($chartLabels) !!},
-            datasets: [
-                {
-                    label: 'Giá trị nhập kho (VNĐ)',
-                    data: {!! json_encode($chartReceipts) !!},
-                    backgroundColor: 'rgba(37, 99, 235, 0.75)',
-                    borderColor: '#2563eb',
-                    borderWidth: 1,
-                    borderRadius: 6,
-                },
-                {
-                    label: 'Giá trị xuất kho (VNĐ)',
-                    data: {!! json_encode($chartIssues) !!},
-                    backgroundColor: 'rgba(16, 185, 129, 0.75)',
-                    borderColor: '#10b981',
-                    borderWidth: 1,
-                    borderRadius: 6,
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'top' },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return context.dataset.label + ': ' + new Intl.NumberFormat('vi-VN').format(context.raw) + ' đ';
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(val) {
-                            return (val / 1000000).toFixed(0) + ' Tr';
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // 2. Category Breakdown Chart (Chart.js)
-    const ctxCat = document.getElementById('categoryChart').getContext('2d');
-    new Chart(ctxCat, {
-        type: 'doughnut',
-        data: {
-            labels: {!! json_encode($catLabels) !!},
-            datasets: [{
-                data: {!! json_encode($catData) !!},
-                backgroundColor: [
-                    '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4'
-                ],
-                hoverOffset: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'bottom' }
-            }
-        }
-    });
+    window.dashboardChartData = {
+        chartLabels: {!! json_encode($chartLabels) !!},
+        chartReceipts: {!! json_encode($chartReceipts) !!},
+        chartIssues: {!! json_encode($chartIssues) !!}
+    };
+    window.dashboardCatData = {
+        catLabels: {!! json_encode($catLabels) !!},
+        catData: {!! json_encode($catData) !!}
+    };
 </script>
+<!-- Dashboard Charts JS -->
+<script src="{{ asset('js/dashboard.js') }}"></script>
 @endsection

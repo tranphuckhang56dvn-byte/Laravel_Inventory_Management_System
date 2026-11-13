@@ -7,7 +7,7 @@
 <div class="row g-4">
     <!-- Cột bên trái: Hướng dẫn nhanh xác thực Sanctum -->
     <div class="col-lg-4">
-        <div class="card card-custom p-4 sticky-top" style="top: 20px;">
+        <div class="card card-custom p-4 sticky-lg-top" style="top: 20px;">
             <div class="d-flex align-items-center gap-2 mb-3">
                 <div class="p-2 bg-primary bg-opacity-10 text-primary rounded-3">
                     <i class="fa-solid fa-key fs-5"></i>
@@ -20,6 +20,9 @@
             <div class="bg-dark text-light p-3 rounded-3 small font-monospace mb-3">
                 Authorization: Bearer &lt;your_token&gt;<br>
                 Accept: application/json
+            </div>
+            <div class="alert alert-info py-2 px-3 small mb-3">
+                <i class="fa-solid fa-circle-info me-1"></i> <strong>Lưu ý:</strong> Khi đang đăng nhập trên trình duyệt Web, bạn có thể mở trực tiếp các đường dẫn API (như <code>/api/products</code>, <code>/api/categories</code>, <code>/api/suppliers</code>) để xem dữ liệu JSON mà không bị lỗi <em>Unauthenticated</em>.
             </div>
 
             <h6 class="fw-bold small text-dark mb-2">Tài khoản kiểm thử Postman:</h6>
@@ -128,12 +131,12 @@
                             <tr>
                                 <td><span class="badge bg-primary">GET</span></td>
                                 <td><code>/api/products/low-stock</code></td>
-                                <td>Danh sách các sản phẩm đang có tồn kho <code>current_stock &le; min_stock</code></td>
+                                <td>Danh sách các sản phẩm đang có tồn kho <code>current_stock &lt; min_stock</code></td>
                             </tr>
                             <tr>
                                 <td><span class="badge bg-success">POST</span></td>
                                 <td><code>/api/products</code></td>
-                                <td>Tạo mới sản phẩm (yêu cầu sku, name, category_id, unit, purchase_price, selling_price, min_stock)</td>
+                                <td>Tạo mới sản phẩm (Admin; yêu cầu sku, name, category_id, unit, purchase_price, selling_price, min_stock)</td>
                             </tr>
                             <tr>
                                 <td><span class="badge bg-primary">GET</span></td>
@@ -143,7 +146,7 @@
                             <tr>
                                 <td><span class="badge bg-info text-dark">PUT</span></td>
                                 <td><code>/api/products/{id}</code></td>
-                                <td>Cập nhật thông tin sản phẩm</td>
+                                <td>Cập nhật thông tin sản phẩm (Admin)</td>
                             </tr>
                             <tr>
                                 <td><span class="badge bg-danger">DELETE</span></td>
@@ -153,7 +156,7 @@
                             <tr>
                                 <td><span class="badge bg-warning text-dark">POST</span></td>
                                 <td><code>/api/products/{id}/adjust-stock</code></td>
-                                <td>Kiểm kê / Điều chỉnh tồn kho với Pessimistic Locking (Admin)</td>
+                                <td>Kiểm kê / Điều chỉnh tồn kho với Pessimistic Locking (Admin &amp; Thủ kho)</td>
                             </tr>
                         </tbody>
                     </table>

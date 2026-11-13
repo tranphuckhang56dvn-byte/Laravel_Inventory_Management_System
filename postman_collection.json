@@ -1,6 +1,6 @@
 {
   "info": {
-    "name": "WMS - Hệ Thống Quản Lý Nhập Xuất Tồn Kho (Laravel API)",
+    "name": "IMS - Hệ Thống Quản Lý Nhập Xuất Tồn Kho (Laravel API)",
     "description": "Bộ sưu tập Postman kiểm thử RESTful API - Đồ án: Thái Anh Kiệt & Trần Phúc Khang (25C2-LTM1)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
