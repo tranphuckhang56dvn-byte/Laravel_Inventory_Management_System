@@ -27,7 +27,7 @@
                     <th class="text-center">Vai trò (Role)</th>
                     <th class="text-center">Phiếu đã lập (Nhập / Xuất)</th>
                     <th class="text-center">Trạng thái</th>
-                    <th class="text-end">Hành động</th>
+                    <th class="text-center text-nowrap" style="width: 100px;">Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,19 +68,21 @@
                                 {{ $u->status ? 'Đang hoạt động' : 'Đã khóa' }}
                             </span>
                         </td>
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal" data-bs-target="#editUser{{ $u->id }}" title="Chỉnh sửa">
-                                <i class="fa-solid fa-pen"></i>
-                            </button>
-                            @if($u->id !== auth()->id())
-                                <form id="del-u-{{ $u->id }}" method="POST" action="{{ route('users.destroy', $u) }}" class="d-inline-block m-0">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmDelete('del-u-{{ $u->id }}', 'Xóa người dùng {{ $u->name }}?')" title="Xóa">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </form>
-                            @endif
+                        <td class="text-center text-nowrap">
+                            <div class="d-inline-flex align-items-center justify-content-center gap-1">
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editUser{{ $u->id }}" title="Chỉnh sửa">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                @if($u->id !== auth()->id())
+                                    <form id="del-u-{{ $u->id }}" method="POST" action="{{ route('users.destroy', $u) }}" class="m-0">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmDelete('del-u-{{ $u->id }}', 'Xóa người dùng {{ $u->name }}?')" title="Xóa">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                @endif
+                            </div>
                         </td>
                     </tr>
                 @endforeach

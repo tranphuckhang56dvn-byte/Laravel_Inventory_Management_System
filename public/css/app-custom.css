@@ -92,6 +92,7 @@ body {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
     background-color: #ffffff;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
 }
 
 .card-stat {
@@ -110,6 +111,7 @@ body {
     letter-spacing: 0.5px;
     border-bottom: 1px solid #e2e8f0;
     padding: 12px 16px;
+    white-space: nowrap;
 }
 
 .table-custom td {
@@ -133,6 +135,32 @@ body {
 
 .btn-primary:hover {
     background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+}
+
+@media (min-width: 992px) {
+    #sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        max-height: 100vh;
+    }
+}
+
+#sidebar .overflow-y-auto::-webkit-scrollbar {
+    width: 5px;
+}
+
+#sidebar .overflow-y-auto::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#sidebar .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.25);
+    border-radius: 4px;
+}
+
+#sidebar .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.5);
 }
 
 @media (max-width: 991.98px) {

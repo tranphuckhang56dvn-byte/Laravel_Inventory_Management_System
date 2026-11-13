@@ -63,7 +63,7 @@
                             <th>Mô tả</th>
                             <th class="text-center">Số sản phẩm</th>
                             <th class="text-center">Trạng thái</th>
-                            <th class="text-end">Hành động</th>
+                            <th class="text-center text-nowrap" style="width: 100px;">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,18 +80,20 @@
                                         {{ $category->status ? 'Hoạt động' : 'Tạm dừng' }}
                                     </span>
                                 </td>
-                                <td class="text-end">
+                                <td class="text-center text-nowrap">
                                     @if(auth()->user()->isAdmin())
-                                        <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal" data-bs-target="#editCat{{ $category->id }}" title="Sửa">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </button>
-                                        <form id="del-cat-{{ $category->id }}" method="POST" action="{{ route('categories.destroy', $category) }}" class="d-inline-block m-0">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmDelete('del-cat-{{ $category->id }}', 'Xóa danh mục {{ $category->name }}?')" title="Xóa">
-                                                <i class="fa-solid fa-trash"></i>
+                                        <div class="d-inline-flex align-items-center justify-content-center gap-1">
+                                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCat{{ $category->id }}" title="Sửa">
+                                                <i class="fa-solid fa-pen"></i>
                                             </button>
-                                        </form>
+                                            <form id="del-cat-{{ $category->id }}" method="POST" action="{{ route('categories.destroy', $category) }}" class="m-0">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmDelete('del-cat-{{ $category->id }}', 'Xóa danh mục {{ $category->name }}?')" title="Xóa">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     @endif
                                 </td>
                             </tr>

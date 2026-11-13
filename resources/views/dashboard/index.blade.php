@@ -9,12 +9,12 @@
     <div class="col-sm-6 col-xl-3">
         <div class="card card-custom p-3 h-100">
             <div class="d-flex align-items-center justify-content-between">
-                <div>
-                    <span class="text-muted small fw-semibold">Tổng mặt hàng</span>
-                    <h3 class="fw-bold mt-1 mb-0 text-dark">{{ number_format($totalProducts) }}</h3>
-                    <small class="text-muted"><i class="fa-solid fa-box text-primary me-1"></i>Sản phẩm đang quản lý</small>
+                <div class="min-w-0 flex-grow-1 me-2">
+                    <span class="text-muted small fw-semibold text-truncate d-block">Tổng mặt hàng</span>
+                    <h3 class="fw-bold mt-1 mb-0 text-dark text-nowrap">{{ number_format($totalProducts) }}</h3>
+                    <small class="text-muted text-truncate d-block"><i class="fa-solid fa-box text-primary me-1"></i>Sản phẩm đang quản lý</small>
                 </div>
-                <div class="p-3 rounded-4 bg-primary bg-opacity-10 text-primary">
+                <div class="flex-shrink-0 d-flex align-items-center justify-content-center rounded-3 bg-primary bg-opacity-10 text-primary" style="width: 48px; height: 48px;">
                     <i class="fa-solid fa-boxes-stacked fs-4"></i>
                 </div>
             </div>
@@ -25,12 +25,12 @@
     <div class="col-sm-6 col-xl-3">
         <div class="card card-custom p-3 h-100">
             <div class="d-flex align-items-center justify-content-between">
-                <div>
-                    <span class="text-muted small fw-semibold">Tổng số lượng tồn</span>
-                    <h3 class="fw-bold mt-1 mb-0 text-dark">{{ number_format($totalStock) }}</h3>
-                    <small class="text-success"><i class="fa-solid fa-cubes-stacked me-1"></i>Đơn vị hiện có trong kho</small>
+                <div class="min-w-0 flex-grow-1 me-2">
+                    <span class="text-muted small fw-semibold text-truncate d-block">Tổng số lượng tồn</span>
+                    <h3 class="fw-bold mt-1 mb-0 text-dark text-nowrap">{{ number_format($totalStock) }}</h3>
+                    <small class="text-success text-truncate d-block"><i class="fa-solid fa-cubes-stacked me-1"></i>Đơn vị hiện có trong kho</small>
                 </div>
-                <div class="p-3 rounded-4 bg-success bg-opacity-10 text-success">
+                <div class="flex-shrink-0 d-flex align-items-center justify-content-center rounded-3 bg-success bg-opacity-10 text-success" style="width: 48px; height: 48px;">
                     <i class="fa-solid fa-warehouse fs-4"></i>
                 </div>
             </div>
@@ -41,12 +41,12 @@
     <div class="col-sm-6 col-xl-3">
         <div class="card card-custom p-3 h-100">
             <div class="d-flex align-items-center justify-content-between">
-                <div>
-                    <span class="text-muted small fw-semibold">Ước tính giá trị kho</span>
-                    <h3 class="fw-bold mt-1 mb-0 text-dark">{{ number_format($totalStockValue) }} <span class="fs-6 fw-normal text-muted">đ</span></h3>
-                    <small class="text-muted"><i class="fa-solid fa-coins text-warning me-1"></i>Tính theo giá vốn nhập</small>
+                <div class="min-w-0 flex-grow-1 me-2">
+                    <span class="text-muted small fw-semibold text-truncate d-block">Ước tính giá trị kho</span>
+                    <h4 class="fw-bold mt-1 mb-0 text-dark text-nowrap" style="letter-spacing: -0.5px;">{{ number_format($totalStockValue) }} <span class="fs-6 fw-normal text-muted">đ</span></h4>
+                    <small class="text-muted text-truncate d-block"><i class="fa-solid fa-coins text-warning me-1"></i>Tính theo giá vốn nhập</small>
                 </div>
-                <div class="p-3 rounded-4 bg-warning bg-opacity-10 text-warning">
+                <div class="flex-shrink-0 d-flex align-items-center justify-content-center rounded-3 bg-warning bg-opacity-10 text-warning" style="width: 48px; height: 48px;">
                     <i class="fa-solid fa-sack-dollar fs-4"></i>
                 </div>
             </div>
@@ -57,17 +57,17 @@
     <div class="col-sm-6 col-xl-3">
         <div class="card card-custom p-3 h-100 border-{{ $lowStockCount > 0 ? 'danger' : 'light' }}">
             <div class="d-flex align-items-center justify-content-between">
-                <div>
-                    <span class="text-muted small fw-semibold">Cảnh báo tồn tối thiểu</span>
-                    <h3 class="fw-bold mt-1 mb-0 {{ $lowStockCount > 0 ? 'text-danger' : 'text-dark' }}">
+                <div class="min-w-0 flex-grow-1 me-2">
+                    <span class="text-muted small fw-semibold text-truncate d-block">Cảnh báo tồn tối thiểu</span>
+                    <h3 class="fw-bold mt-1 mb-0 text-nowrap {{ $lowStockCount > 0 ? 'text-danger' : 'text-dark' }}">
                         {{ $lowStockCount }}
                     </h3>
-                    <small class="{{ $lowStockCount > 0 ? 'text-danger fw-semibold' : 'text-muted' }}">
+                    <small class="{{ $lowStockCount > 0 ? 'text-danger fw-semibold' : 'text-muted' }} text-truncate d-block">
                         <i class="fa-solid fa-triangle-exclamation me-1"></i>
                         {{ $lowStockCount > 0 ? 'Cần bổ sung hàng gấp' : 'Tồn kho ở mức an toàn' }}
                     </small>
                 </div>
-                <div class="p-3 rounded-4 bg-danger bg-opacity-10 text-danger">
+                <div class="flex-shrink-0 d-flex align-items-center justify-content-center rounded-3 bg-danger bg-opacity-10 text-danger" style="width: 48px; height: 48px;">
                     <i class="fa-solid fa-bell fs-4"></i>
                 </div>
             </div>
