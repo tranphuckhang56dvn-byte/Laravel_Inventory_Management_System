@@ -38,7 +38,7 @@
                 <label class="form-label small fw-semibold text-secondary">Địa chỉ Email</label>
                 <div class="input-group">
                     <span class="input-group-text bg-light text-muted border-end-0"><i class="fa-regular fa-envelope"></i></span>
-                    <input type="email" name="email" id="email" class="form-control border-start-0" placeholder="name@domain.com" value="{{ old('email', 'admin@kho.vn') }}" required autofocus>
+                    <input type="email" name="email" id="email" class="form-control border-start-0" placeholder="name@domain.com" value="{{ old('email') }}" required autofocus>
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-text bg-light text-muted border-end-0"><i class="fa-solid fa-lock"></i></span>
-                    <input type="password" name="password" id="password" class="form-control border-start-0" placeholder="••••••••" value="admin123" required>
+                    <input type="password" name="password" id="password" class="form-control border-start-0" placeholder="••••••••" required>
                 </div>
             </div>
 
@@ -62,29 +62,7 @@
             </button>
         </form>
 
-        <div class="mt-4 pt-3 border-top">
-            <div class="small fw-bold text-muted mb-2 text-center text-uppercase" style="font-size: 0.75rem;">
-                Tài khoản Demo (Nhấp để tự động điền)
-            </div>
-            <div class="d-flex flex-column gap-2">
-                <div class="demo-pill d-flex flex-wrap justify-content-between align-items-center gap-1" onclick="fillAccount('admin@kho.vn', 'admin123')">
-                    <div>
-                        <span class="badge bg-danger me-1">Admin</span>
-                        <strong class="small">Thái Anh Kiệt (Quản trị viên)</strong>
-                    </div>
-                    <small class="text-primary font-monospace">admin@kho.vn</small>
-                </div>
-                <div class="demo-pill d-flex flex-wrap justify-content-between align-items-center gap-1" onclick="fillAccount('staff@kho.vn', 'staff123')">
-                    <div>
-                        <span class="badge bg-primary me-1">Staff</span>
-                        <strong class="small">Trần Phúc Khang (Thủ kho)</strong>
-                    </div>
-                    <small class="text-primary font-monospace">staff@kho.vn</small>
-                </div>
-            </div>
-        </div>
-
-        <div class="text-center text-muted small mt-4" style="font-size: 0.72rem;">
+        <div class="text-center text-muted small mt-4 pt-3 border-top" style="font-size: 0.72rem;">
             Đồ án chuyên ngành CNTT - Nhóm: Thái Anh Kiệt & Trần Phúc Khang (25C2-LTM1)
         </div>
     </div>
