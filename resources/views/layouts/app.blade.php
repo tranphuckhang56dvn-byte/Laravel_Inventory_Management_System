@@ -32,7 +32,7 @@
                 </div>
                 <div class="flex-grow-1">
                     <h6 class="mb-0 fw-bold tracking-tight">KHO HÀNG IMS</h6>
-                    <small class="text-secondary" style="font-size: 0.75rem;">Laravel 13 & RESTful API</small>
+                    <small class="text-secondary" style="font-size: 0.75rem;">Laravel 11 & RESTful API</small>
                 </div>
                 <button type="button" id="sidebarClose" class="btn btn-sm text-secondary d-lg-none p-1" aria-label="Đóng menu">
                     <i class="fa-solid fa-xmark fs-5"></i>

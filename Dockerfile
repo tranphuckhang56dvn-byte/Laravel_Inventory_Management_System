@@ -1,6 +1,6 @@
 FROM php:8.3-apache
 
-# Install system packages & PHP extensions required for Laravel 13 + TiDB Cloud (TLS)
+# Install system packages & PHP extensions required for Laravel 11 + TiDB Cloud (TLS)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
