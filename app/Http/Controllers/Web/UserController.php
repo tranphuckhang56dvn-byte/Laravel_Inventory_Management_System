@@ -27,7 +27,7 @@ class UserController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        $validated['status'] = $request->boolean('status', true);
+        $validated['status'] = $request->boolean('status');
         User::create($validated);
 
         return back()->with('success', 'Tạo tài khoản người dùng mới thành công!');
@@ -43,7 +43,7 @@ class UserController extends Controller
             'password' => 'nullable|string|min:6',
         ]);
 
-        $validated['status'] = $request->boolean('status', true);
+        $validated['status'] = $request->boolean('status');
 
         if (empty($validated['password'])) {
             unset($validated['password']);
@@ -60,8 +60,8 @@ class UserController extends Controller
             return back()->with('error', 'Không thể xóa tài khoản của chính bạn!');
         }
 
-        if ($user->goodsReceipts()->count() > 0 || $user->goodsIssues()->count() > 0) {
-            return back()->with('error', 'Không thể xóa người dùng đã từng lập phiếu nhập hoặc phiếu xuất kho.');
+        if ($user->goodsReceipts()->count() > 0 || $user->goodsIssues()->count() > 0 || $user->inventoryLogs()->count() > 0) {
+            return back()->with('error', 'Không thể xóa người dùng đã từng phát sinh giao dịch hoặc nhật ký biến động kho.');
         }
 
         $user->delete();
