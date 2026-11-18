@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ceee71d6eaead8c7abe386c9ddb4e0ca",
+    "content-hash": "9ce1bf6737d71f840d7c9c9b27a8b5de",
     "packages": [
         {
             "name": "brick/math",
@@ -6710,16 +6710,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.32.3",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "1cf8e0320bed4b3c6e51df92039a5636c3887728"
+                "reference": "69dcca060ecb15e4b564af63d1f642c81a241d6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/1cf8e0320bed4b3c6e51df92039a5636c3887728",
-                "reference": "1cf8e0320bed4b3c6e51df92039a5636c3887728",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/69dcca060ecb15e4b564af63d1f642c81a241d6f",
+                "reference": "69dcca060ecb15e4b564af63d1f642c81a241d6f",
                 "shasum": ""
             },
             "require": {
@@ -6727,19 +6727,16 @@
                 "ext-mbstring": "*",
                 "ext-tokenizer": "*",
                 "ext-xml": "*",
-                "php": "^8.3.0"
+                "php": "^8.2.0"
             },
             "require-dev": {
-                "composer/semver": "^3.6.0",
-                "friendsofphp/php-cs-fixer": "^3.95.30",
-                "illuminate/view": "^13.42.0",
-                "larastan/larastan": "^3.15.0",
-                "laravel-zero/framework": "^13.0.0",
-                "laravel/agent-detector": "^2.0.5",
-                "laravel/prompts": "^0.3.27",
-                "mockery/mockery": "^1.6.15",
-                "nunomaduro/termwind": "^2.4.1",
-                "pestphp/pest": "^4.7.8"
+                "friendsofphp/php-cs-fixer": "^3.90.0",
+                "illuminate/view": "^12.40.1",
+                "larastan/larastan": "^3.8.0",
+                "laravel-zero/framework": "^12.0.4",
+                "mockery/mockery": "^1.6.12",
+                "nunomaduro/termwind": "^2.3.3",
+                "pestphp/pest": "^3.8.4"
             },
             "bin": [
                 "builds/pint"
@@ -6776,8 +6773,8 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2026-11-11T16:45:13+00:00",
-            "published-time": "2026-11-11T16:45:39+00:00"
+            "time": "2025-11-25T21:15:52+00:00",
+            "published-time": "2025-11-25T21:19:28+00:00"
         },
         {
             "name": "laravel/roster",
@@ -8839,7 +8836,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.3"
+        "php": "^8.2"
     },
     "platform-dev": {},
     "plugin-api-version": "2.11.0"
