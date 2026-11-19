@@ -50,8 +50,8 @@ class ProductController extends Controller
         }
 
         $products = $query->latest()->paginate(12)->withQueryString();
-        $categories = Category::where('status', true)->orderBy('name')->get();
-        $suppliers = Supplier::where('status', true)->orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
+        $suppliers = Supplier::orderBy('name')->get();
 
         return view('products.index', compact('products', 'categories', 'suppliers'));
     }
@@ -82,7 +82,7 @@ class ProductController extends Controller
             'status' => 'boolean',
         ]);
 
-        $validated['status'] = $request->boolean('status', true);
+        $validated['status'] = $request->boolean('status');
         $validated['current_stock'] = $validated['current_stock'] ?? 0;
 
         $product = Product::create($validated);
@@ -114,8 +114,14 @@ class ProductController extends Controller
 
     public function edit(Product $product): View
     {
-        $categories = Category::where('status', true)->orderBy('name')->get();
-        $suppliers = Supplier::where('status', true)->orderBy('name')->get();
+        $categories = Category::where('status', true)
+            ->orWhere('id', $product->category_id)
+            ->orderBy('name')
+            ->get();
+        $suppliers = Supplier::where('status', true)
+            ->orWhere('id', $product->supplier_id)
+            ->orderBy('name')
+            ->get();
 
         return view('products.edit', compact('product', 'categories', 'suppliers'));
     }
@@ -137,7 +143,7 @@ class ProductController extends Controller
             'status' => 'boolean',
         ]);
 
-        $validated['status'] = $request->boolean('status', true);
+        $validated['status'] = $request->boolean('status');
         $product->update($validated);
 
         return redirect()->route('products.index')->with('success', 'Cập nhật sản phẩm thành công!');

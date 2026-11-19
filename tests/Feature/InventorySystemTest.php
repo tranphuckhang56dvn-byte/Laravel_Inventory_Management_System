@@ -327,12 +327,81 @@ class InventorySystemTest extends TestCase
     }
 
     /**
-     * Test Admin có quyền cao nhất trên Danh mục dữ liệu
+     * Test Admin có quyền cao nhất trên Danh mục dữ liệu và có thể bật/tắt trạng thái
      */
     public function test_admin_has_full_master_data_access(): void
     {
         $this->actingAs($this->admin)->get('/products/create')->assertStatus(200);
         $this->actingAs($this->admin)->get('/products/'.$this->product->id.'/edit')->assertStatus(200);
+
+        // 1. Tắt trạng thái danh mục (cả trường hợp bỏ chọn checkbox và gửi status=0)
+        $this->actingAs($this->admin)->put('/categories/'.$this->category->id, [
+            'code' => $this->category->code,
+            'name' => $this->category->name,
+            'status' => '0',
+        ])->assertRedirect();
+        $this->category->refresh();
+        $this->assertFalse($this->category->status);
+
+        // Bật lại trạng thái danh mục
+        $this->actingAs($this->admin)->put('/categories/'.$this->category->id, [
+            'code' => $this->category->code,
+            'name' => $this->category->name,
+            'status' => '1',
+        ])->assertRedirect();
+        $this->category->refresh();
+        $this->assertTrue($this->category->status);
+
+        // 2. Tắt trạng thái nhà cung cấp (khi form checkbox không gửi status)
+        $this->actingAs($this->admin)->put('/suppliers/'.$this->supplier->id, [
+            'code' => $this->supplier->code,
+            'name' => $this->supplier->name,
+            'phone' => $this->supplier->phone,
+            'email' => $this->supplier->email,
+        ])->assertRedirect();
+        $this->supplier->refresh();
+        $this->assertFalse($this->supplier->status);
+
+        // Bật lại trạng thái nhà cung cấp
+        $this->actingAs($this->admin)->put('/suppliers/'.$this->supplier->id, [
+            'code' => $this->supplier->code,
+            'name' => $this->supplier->name,
+            'phone' => $this->supplier->phone,
+            'email' => $this->supplier->email,
+            'status' => '1',
+        ])->assertRedirect();
+        $this->supplier->refresh();
+        $this->assertTrue($this->supplier->status);
+
+        // 3. Tắt trạng thái kinh doanh sản phẩm
+        $this->actingAs($this->admin)->put('/products/'.$this->product->id, [
+            'sku' => $this->product->sku,
+            'name' => $this->product->name,
+            'category_id' => $this->category->id,
+            'supplier_id' => $this->supplier->id,
+            'unit' => $this->product->unit,
+            'purchase_price' => $this->product->purchase_price,
+            'selling_price' => $this->product->selling_price,
+            'min_stock' => $this->product->min_stock,
+            'status' => '0',
+        ])->assertRedirect();
+        $this->product->refresh();
+        $this->assertFalse($this->product->status);
+
+        // Bật lại trạng thái kinh doanh sản phẩm
+        $this->actingAs($this->admin)->put('/products/'.$this->product->id, [
+            'sku' => $this->product->sku,
+            'name' => $this->product->name,
+            'category_id' => $this->category->id,
+            'supplier_id' => $this->supplier->id,
+            'unit' => $this->product->unit,
+            'purchase_price' => $this->product->purchase_price,
+            'selling_price' => $this->product->selling_price,
+            'min_stock' => $this->product->min_stock,
+            'status' => '1',
+        ])->assertRedirect();
+        $this->product->refresh();
+        $this->assertTrue($this->product->status);
     }
 
     /**

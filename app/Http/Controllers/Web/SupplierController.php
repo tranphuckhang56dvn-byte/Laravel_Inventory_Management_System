@@ -39,7 +39,7 @@ class SupplierController extends Controller
             'status' => 'boolean',
         ]);
 
-        $validated['status'] = $request->boolean('status', true);
+        $validated['status'] = $request->boolean('status');
         Supplier::create($validated);
 
         return back()->with('success', 'Thêm nhà cung cấp mới thành công!');
@@ -56,7 +56,7 @@ class SupplierController extends Controller
             'status' => 'boolean',
         ]);
 
-        $validated['status'] = $request->boolean('status', true);
+        $validated['status'] = $request->boolean('status');
         $supplier->update($validated);
 
         return back()->with('success', 'Cập nhật thông tin nhà cung cấp thành công!');

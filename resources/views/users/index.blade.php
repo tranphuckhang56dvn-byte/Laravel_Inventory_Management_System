@@ -127,7 +127,8 @@
                         <input type="password" name="password" class="form-control" placeholder="••••••••">
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" name="status" id="uStatus{{ $u->id }}" value="1" {{ $u->status ? 'checked' : '' }}>
+                        <input type="hidden" name="status" value="0">
+                        <input class="form-check-input" type="checkbox" name="status" id="uStatus{{ $u->id }}" value="1" {{ old('status', $u->status) ? 'checked' : '' }}>
                         <label class="form-check-label small fw-semibold" for="uStatus{{ $u->id }}">Cho phép đăng nhập (Active)</label>
                     </div>
                 </div>
@@ -174,6 +175,7 @@
                     <input type="password" name="password" class="form-control" placeholder="Tối thiểu 6 ký tự" required>
                 </div>
                 <div class="form-check form-switch">
+                    <input type="hidden" name="status" value="0">
                     <input class="form-check-input" type="checkbox" name="status" id="newUserStatus" value="1" checked>
                     <label class="form-check-label small fw-semibold" for="newUserStatus">Kích hoạt tài khoản ngay</label>
                 </div>

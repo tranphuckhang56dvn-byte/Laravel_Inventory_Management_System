@@ -124,7 +124,8 @@
                             <textarea name="address" class="form-control" rows="2">{{ $sup->address }}</textarea>
                         </div>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" name="status" id="supStatus{{ $sup->id }}" value="1" {{ $sup->status ? 'checked' : '' }}>
+                            <input type="hidden" name="status" value="0">
+                            <input class="form-check-input" type="checkbox" name="status" id="supStatus{{ $sup->id }}" value="1" {{ old('status', $sup->status) ? 'checked' : '' }}>
                             <label class="form-check-label small fw-semibold" for="supStatus{{ $sup->id }}">Hợp tác kinh doanh</label>
                         </div>
                     </div>
@@ -171,6 +172,7 @@
                     <textarea name="address" class="form-control" rows="2" placeholder="Số nhà, đường, quận/huyện..."></textarea>
                 </div>
                 <div class="form-check form-switch">
+                    <input type="hidden" name="status" value="0">
                     <input class="form-check-input" type="checkbox" name="status" id="newSupStatus" value="1" checked>
                     <label class="form-check-label small fw-semibold" for="newSupStatus">Kích hoạt hợp tác</label>
                 </div>

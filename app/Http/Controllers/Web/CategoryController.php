@@ -26,7 +26,7 @@ class CategoryController extends Controller
             'status' => 'boolean',
         ]);
 
-        $validated['status'] = $request->boolean('status', true);
+        $validated['status'] = $request->boolean('status');
         Category::create($validated);
 
         return back()->with('success', 'Thêm danh mục mới thành công!');
@@ -41,7 +41,7 @@ class CategoryController extends Controller
             'status' => 'boolean',
         ]);
 
-        $validated['status'] = $request->boolean('status', true);
+        $validated['status'] = $request->boolean('status');
         $category->update($validated);
 
         return back()->with('success', 'Cập nhật danh mục thành công!');

@@ -11,7 +11,14 @@
                 <i class="fa-solid fa-box-open fa-3x"></i>
             </div>
             <h5 class="fw-bold text-dark mb-1">{{ $product->name }}</h5>
-            <span class="badge bg-light text-secondary border font-monospace mb-3">Mã SKU: {{ $product->sku }}</span>
+            <div class="mb-3">
+                <span class="badge bg-light text-secondary border font-monospace me-1">Mã SKU: {{ $product->sku }}</span>
+                @if($product->status)
+                    <span class="badge bg-success bg-opacity-75">Kinh doanh</span>
+                @else
+                    <span class="badge bg-secondary">Ngừng bán</span>
+                @endif
+            </div>
 
             <div class="p-3 bg-light rounded-3 mb-3 text-start">
                 <div class="d-flex justify-content-between mb-2">

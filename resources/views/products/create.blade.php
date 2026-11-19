@@ -96,6 +96,7 @@
 
                     <div class="col-12">
                         <div class="form-check form-switch">
+                            <input type="hidden" name="status" value="0">
                             <input class="form-check-input" type="checkbox" name="status" id="statusSwitch" value="1" {{ old('status', '1') == '1' ? 'checked' : '' }}>
                             <label class="form-check-label fw-semibold small text-secondary" for="statusSwitch">Kích hoạt kinh doanh mặt hàng này</label>
                         </div>
