@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- App Custom CSS -->
-    <link href="{{ asset('css/app-custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app-custom.css') }}?v={{ file_exists(public_path('css/app-custom.css')) ? filemtime(public_path('css/app-custom.css')) : time() }}" rel="stylesheet">
     @yield('styles')
 </head>
 <body>

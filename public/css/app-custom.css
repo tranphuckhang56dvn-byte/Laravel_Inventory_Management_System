@@ -139,10 +139,20 @@ body {
 
 @media (min-width: 992px) {
     #sidebar {
-        position: sticky;
+        position: fixed;
         top: 0;
+        left: 0;
+        bottom: 0;
+        width: 260px;
         height: 100vh;
         max-height: 100vh;
+        z-index: 1020;
+    }
+
+    .main-content {
+        margin-left: 260px;
+        width: calc(100% - 260px);
+        min-height: 100vh;
     }
 }
 
@@ -203,7 +213,9 @@ body {
     }
     .main-content {
         margin: 0 !important;
+        margin-left: 0 !important;
         padding: 0 !important;
+        width: 100% !important;
     }
     .card-custom {
         border: none !important;
