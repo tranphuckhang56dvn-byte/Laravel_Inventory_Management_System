@@ -91,10 +91,18 @@ class InventoryService
                 $before = $product->current_stock;
                 $after = $before + $quantity;
 
-                // Cập nhật tồn kho sản phẩm & giá nhập gần nhất
+                // Cập nhật tồn kho sản phẩm & tự động tính giá vốn bình quân gia quyền theo công thức kế toán
                 $product->current_stock = $after;
                 if ($unitPrice > 0) {
-                    $product->purchase_price = $unitPrice;
+                    if ($before > 0 && floatval($product->purchase_price) > 0) {
+                        // Công thức: [(Tồn cũ * Giá vốn cũ) + (Số lượng nhập * Giá nhập)] / (Tồn cũ + Số lượng nhập)
+                        $oldTotalVal = $before * floatval($product->purchase_price);
+                        $newBatchVal = $quantity * $unitPrice;
+                        $product->purchase_price = round(($oldTotalVal + $newBatchVal) / $after, 2);
+                    } else {
+                        // Nếu trước đó tồn kho = 0 hoặc chưa có giá vốn, lấy giá của lô mới nhập
+                        $product->purchase_price = $unitPrice;
+                    }
                 }
                 $product->save();
 
@@ -110,7 +118,7 @@ class InventoryService
                     'quantity_change' => $quantity,
                     'quantity_after' => $after,
                     'unit_price' => $unitPrice,
-                    'note' => 'Nhập kho theo phiếu '.$receipt->code.(!empty($item['note']) ? ' ('.$item['note'].')' : ''),
+                    'note' => 'Nhập kho theo phiếu '.$receipt->code.(! empty($item['note']) ? ' ('.$item['note'].')' : ''),
                 ]);
             }
 

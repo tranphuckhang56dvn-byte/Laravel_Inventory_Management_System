@@ -147,10 +147,10 @@ class InventorySystemTest extends TestCase
 
         $response->assertRedirect();
 
-        // Kiểm tra tồn kho sau khi nhập
+        // Kiểm tra tồn kho sau khi nhập & giá vốn bình quân gia quyền: (10 * 800.000 + 15 * 820.000) / 25 = 812.000
         $this->product->refresh();
         $this->assertEquals($initialStock + 15, $this->product->current_stock); // 25
-        $this->assertEquals(820000, $this->product->purchase_price);
+        $this->assertEquals(812000, $this->product->purchase_price);
 
         // Kiểm tra Audit Log được lưu chính xác
         $this->assertDatabaseHas('inventory_logs', [
